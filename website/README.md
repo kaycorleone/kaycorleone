@@ -1,4 +1,4 @@
-# Website des Elternrats der Primarschule Affoltern am Albis
+# Gemeinsame Website der Elternräte der Primarschule Affoltern am Albis
 
 Einfache, statische Website ohne Server und ohne Datenbank. Sie besteht aus wenigen Dateien und lässt sich bei jedem Webhosting oder kostenlos (zum Beispiel GitHub Pages oder Netlify) veröffentlichen.
 
@@ -17,8 +17,8 @@ Einfache, statische Website ohne Server und ohne Datenbank. Sie besteht aus weni
 
 | Datei | Inhalt |
 | --- | --- |
-| `config.js` | E-Mail-Adresse des Elternrats, Facebook-Seite, Newsletter-Dienst, optionaler Formulardienst |
-| `content.js` | Mitteilungen, Anlässe, Aufrufe und Projekte. Die Listen sind zu Beginn leer; das Muster steht jeweils im Kommentar. |
+| `config.js` | Gemeinsame E-Mail-Adresse und Facebook-Seite, Newsletter-Dienst, optionaler Formulardienst, Verantwortliche je Elternrat für das Impressum |
+| `content.js` | Mitteilungen, Anlässe, Aufrufe und Projekte, jeweils mit Schuleinheit oder «Alle». Die Listen sind zu Beginn leer; das Muster steht jeweils im Kommentar. |
 | `index.html` | Feste Texte und Links |
 
 Vor dem Veröffentlichen muss in `config.js` die echte E-Mail-Adresse eingetragen werden. Der Platzhalter `elternrat@example.org` ist keine gültige Adresse des Elternrats.

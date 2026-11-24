@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Elternrat Primarschule Affoltern am Albis</title>
-  <meta name="description" content="Elternrat der Primarschule Affoltern am Albis: Elternbildung, Projekte, Mithelfen, Informationen für neue Familien und Newsletter.">
+  <title>Elternräte Primarschule Affoltern am Albis</title>
+  <meta name="description" content="Elternräte der Primarschule Affoltern am Albis: Elternbildung, Projekte, Mithelfen, Informationen für neue Familien und Newsletter.">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -16,7 +16,7 @@
       <a class="brand" href="#start" data-tab="start">
         <span class="brand-mark" aria-hidden="true"></span>
         <span>
-          <span class="brand-title">Elternrat</span>
+          <span class="brand-title">Elternräte</span>
           <span class="brand-sub">Primarschule Affoltern am Albis</span>
         </span>
       </a>
@@ -39,7 +39,7 @@
     <section class="tab" id="tab-start" data-section="start">
       <div class="hero">
         <h1>Gemeinsam für eine gute Schule</h1>
-        <p class="lead">Wir sind Eltern, die sich im Elternrat für ein gutes Miteinander von Familien und Schule einsetzen. Hier finden Sie unsere Angebote, Projekte und alle Wege, wie Sie mitmachen können.</p>
+        <p class="lead">Wir sind Eltern, die sich in den Elternräten der drei Schuleinheiten für ein gutes Miteinander von Familien und Schule einsetzen. Hier finden Sie unsere Angebote, Projekte und alle Wege, wie Sie mitmachen können.</p>
         <p class="actions">
           <a class="btn" href="#mithelfen" data-tab="mithelfen">Ich möchte helfen</a>
           <a class="btn btn-ghost" href="#neu" data-tab="neu">Wir sind neu hier</a>
@@ -65,11 +65,19 @@
         </a>
       </div>
 
+      <h2>Die drei Elternräte</h2>
+      <div class="units">
+        <a class="unit-card" href="https://www.psa.ch/sebutzenfs" target="_blank" rel="noopener"><strong>Butzen/Semper</strong><span>Elternrat der Schuleinheit Butzen/Semper</span><small>Seite auf psa.ch</small></a>
+        <a class="unit-card" href="https://www.psa.ch/sechilefeldfs" target="_blank" rel="noopener"><strong>Chilefeld/Stigeli</strong><span>Elternrat der Schuleinheit Chilefeld/Stigeli</span><small>Seite auf psa.ch</small></a>
+        <a class="unit-card" href="https://psa.ch/de/schule/elternbildung/sezwillikonfs" target="_blank" rel="noopener"><strong>Zwillikon</strong><span>Elternrat der Schuleinheit Zwillikon</span><small>Seite auf psa.ch</small></a>
+      </div>
+      <p class="meta">Gemeinsame Kontaktadresse: <a data-email href="#"></a>. Bitte geben Sie in Ihrer Nachricht Ihre Schuleinheit an.</p>
+
       <div class="grid-2">
         <section class="panel">
           <h2>Wer wir sind</h2>
-          <p>Die Primarschule Affoltern am Albis hat drei Schuleinheiten mit je einem Elternrat: Butzen/Semper, Chilefeld/Stigeli und Zwillikon. Im Elternrat arbeiten Delegierte aus den Klassen mit. Sie werden in der Regel am Elternabend gewählt.</p>
-          <p>Wir fördern den Austausch zwischen Eltern und Schule, organisieren Anlässe und Elternbildung, unterstützen Projekte und heissen neue Familien willkommen.</p>
+          <p>Die Primarschule Affoltern am Albis hat drei Schuleinheiten mit je einem Elternrat. In jedem Elternrat arbeiten Delegierte aus den Klassen mit. Sie werden zwischen den Sommer- und den Herbstferien gewählt, in der Regel am Elternabend.</p>
+          <p>Auf dieser gemeinsamen Website stellen die drei Elternräte ihre Angebote vor. Wir fördern den Austausch zwischen Eltern und Schule, organisieren Anlässe und Elternbildung, unterstützen Projekte und heissen neue Familien willkommen.</p>
           <p class="note-line">Personelle Fragen, Unterricht, Lehrplan, Lehrmittel, Stundenplan und die Einteilung in Klassen gehören nach § 55 des Volksschulgesetzes des Kantons Zürich nicht zur Elternmitwirkung. Dafür sind die Klassenlehrperson und die Schulleitung zuständig.</p>
         </section>
         <section class="panel">
@@ -84,6 +92,14 @@
       <h1>Elternbildung</h1>
       <p class="lead">Kinder wachsen, Fragen wachsen mit. Wir organisieren Vorträge und Austauschabende zu Themen, die Eltern beschäftigen, und sammeln gute Angebote aus der Region.</p>
 
+      <label class="unit-filter">Schuleinheit
+        <select data-unit-filter>
+          <option value="">Alle anzeigen</option>
+          <option>Butzen/Semper</option>
+          <option>Chilefeld/Stigeli</option>
+          <option>Zwillikon</option>
+        </select>
+      </label>
       <h2>Unsere nächsten Anlässe</h2>
       <div id="events"></div>
 
@@ -116,6 +132,16 @@
               </select>
             </label>
             <label>E-Mail <span class="hint">freiwillig, falls wir Sie einladen dürfen</span><input name="email" type="email" maxlength="200" autocomplete="email"></label>
+          </div>
+          <div class="row">
+            <label>Schuleinheit
+              <select name="schuleinheit">
+                <option>Alle Schuleinheiten</option>
+                <option>Butzen/Semper</option>
+                <option>Chilefeld/Stigeli</option>
+                <option>Zwillikon</option>
+              </select>
+            </label>
           </div>
           <button type="submit" class="btn">Themen senden</button>
           <p class="form-status" role="status" aria-live="polite"></p>
@@ -173,6 +199,14 @@
       <h1>Projekte</h1>
       <p class="lead">Gemeinsam mit der Schule setzen wir Projekte um, die den Kindern und Familien zugutekommen. Für einige suchen wir noch Unterstützung.</p>
 
+      <label class="unit-filter">Schuleinheit
+        <select data-unit-filter>
+          <option value="">Alle anzeigen</option>
+          <option>Butzen/Semper</option>
+          <option>Chilefeld/Stigeli</option>
+          <option>Zwillikon</option>
+        </select>
+      </label>
       <h2>Wir suchen Unterstützung</h2>
       <div id="needs"></div>
 
@@ -190,9 +224,16 @@
             <label>Bei welchem Projekt?
               <select name="projekt" id="project-select"><option value="Allgemein">Ich bin offen für alles</option></select>
             </label>
-            <label>Klasse Ihres Kindes <span class="hint">freiwillig</span><input name="klasse" maxlength="40"></label>
+            <label>Schuleinheit
+              <select name="schuleinheit">
+                <option>Alle Schuleinheiten</option>
+                <option>Butzen/Semper</option>
+                <option>Chilefeld/Stigeli</option>
+                <option>Zwillikon</option>
+              </select>
+            </label>
           </div>
-          <label>Nachricht <span class="hint">freiwillig</span><textarea name="nachricht" rows="3" maxlength="1500"></textarea></label>
+          <label>Nachricht <span class="hint">freiwillig, zum Beispiel Klasse Ihres Kindes oder wann Sie Zeit haben</span><textarea name="nachricht" rows="3" maxlength="1500"></textarea></label>
           <label class="check"><input type="checkbox" name="einwilligung" required> <span>Ich bin einverstanden, dass der Elternrat meine Angaben für die Organisation dieses Projekts verwendet.</span></label>
           <button type="submit" class="btn">Ich helfe mit</button>
           <p class="form-status" role="status" aria-live="polite"></p>
@@ -201,9 +242,19 @@
 
       <section class="panel">
         <h2>Haben Sie eine Projektidee?</h2>
-        <p>Schreiben Sie uns, was Sie sich für die Schule wünschen und wie Sie sich die Umsetzung vorstellen. Wir besprechen jede Idee an unserer nächsten Sitzung und geben Ihnen Rückmeldung.</p>
+        <p>Schreiben Sie uns, was Sie sich für die Schule wünschen und wie Sie sich die Umsetzung vorstellen. Der Elternrat Ihrer Schuleinheit bespricht die Idee an seiner nächsten Sitzung und gibt Ihnen Rückmeldung. Ideen für alle drei Schuleinheiten besprechen die Elternräte gemeinsam.</p>
         <form class="form" data-form="idee">
           <label>Ihre Idee <textarea name="idee" required rows="4" maxlength="2000"></textarea></label>
+          <div class="row">
+            <label>Schuleinheit
+              <select name="schuleinheit">
+                <option>Alle Schuleinheiten</option>
+                <option>Butzen/Semper</option>
+                <option>Chilefeld/Stigeli</option>
+                <option>Zwillikon</option>
+              </select>
+            </label>
+          </div>
           <div class="row">
             <label>Name <span class="hint">freiwillig</span><input name="name" maxlength="120" autocomplete="name"></label>
             <label>E-Mail <span class="hint">für unsere Rückmeldung</span><input name="email" type="email" maxlength="200" autocomplete="email"></label>
@@ -239,6 +290,7 @@
             <label>Telefon <span class="hint">freiwillig</span><input name="telefon" type="tel" maxlength="40" autocomplete="tel"></label>
             <label>Schuleinheit
               <select name="schuleinheit">
+                <option>Weiss ich noch nicht</option>
                 <option>Butzen/Semper</option>
                 <option>Chilefeld/Stigeli</option>
                 <option>Zwillikon</option>
@@ -320,6 +372,7 @@
             <label>Sprachen <span class="hint">zum Beispiel Deutsch, Portugiesisch</span><input name="sprachen" maxlength="120"></label>
             <label>Schuleinheit
               <select name="schuleinheit">
+                <option>Weiss ich noch nicht</option>
                 <option>Butzen/Semper</option>
                 <option>Chilefeld/Stigeli</option>
                 <option>Zwillikon</option>
@@ -368,15 +421,15 @@
         </li>
         <li>
           <h2>Eine Idee oder ein Anliegen einbringen</h2>
-          <p>Ideen für die Schule senden Sie unter «Projekte». Wir besprechen jede Idee an unserer Sitzung und geben Rückmeldung. Fragen zu Ihrem Kind, zu Lehrpersonen oder zum Unterricht klären Sie bitte mit der Klassenlehrperson oder der Schulleitung.</p>
+          <p>Ideen für die Schule senden Sie unter «Projekte». Der Elternrat Ihrer Schuleinheit bespricht jede Idee an seiner Sitzung und gibt Rückmeldung. Fragen zu Ihrem Kind, zu Lehrpersonen oder zum Unterricht klären Sie bitte mit der Klassenlehrperson oder der Schulleitung.</p>
         </li>
         <li>
           <h2>Im Elternrat mitwirken</h2>
-          <p>Die Delegierten werden in der Regel am Elternabend Ihrer Klasse gewählt. Wenn Sie sich vorstellen können mitzumachen, kreuzen Sie unter «Mithelfen» das Feld «Interesse am Elternrat» an. Wir melden uns vor dem Elternabend bei Ihnen.</p>
+          <p>Jede Schuleinheit hat einen eigenen Elternrat. Die Delegierten werden zwischen den Sommer- und den Herbstferien gewählt, in der Regel am Elternabend Ihrer Klasse. Wenn Sie sich vorstellen können mitzumachen, kreuzen Sie unter «Mithelfen» das Feld «Interesse am Elternrat» an. Wir melden uns vor dem Elternabend bei Ihnen.</p>
         </li>
         <li>
           <h2>Was passiert mit meinen Angaben?</h2>
-          <p>Die Formulare senden Ihre Angaben per E-Mail an den Elternrat. Wir verwenden sie nur für den angegebenen Zweck und geben sie nicht weiter. Auf Wunsch löschen wir sie jederzeit.</p>
+          <p>Die Formulare senden Ihre Angaben per E-Mail an die gemeinsame Adresse der Elternräte. Wir leiten sie an den Elternrat Ihrer Schuleinheit weiter, verwenden sie nur für den angegebenen Zweck und löschen sie auf Wunsch jederzeit. Mehr dazu im <a href="#impressum" data-tab="impressum">Impressum und Datenschutz</a>.</p>
         </li>
       </ol>
     </section>
@@ -387,8 +440,8 @@
 
       <div class="grid-2">
         <section class="panel">
-          <h2>Elternrat</h2>
-          <p>Schreiben Sie uns: <a data-email href="#"></a></p>
+          <h2>Elternräte</h2>
+          <p>Gemeinsame Adresse der drei Elternräte: <a data-email href="#"></a>. Bitte nennen Sie Ihre Schuleinheit, damit wir Ihre Nachricht weiterleiten können.</p>
           <p id="fb-contact"></p>
           <p>Die drei Elternräte auf der Website der Schule:</p>
           <ul class="plain">
@@ -458,16 +511,45 @@
       <p class="meta">Notfall: Polizei 117, Sanität 144, Beratung für Kinder und Jugendliche 147.</p>
     </section>
 
+    <!-- Impressum und Datenschutz -->
+    <section class="tab" id="tab-impressum" data-section="impressum" hidden>
+      <h1>Impressum und Datenschutz</h1>
+      <section class="panel">
+        <h2>Verantwortlich für diese Website</h2>
+        <p>Die Elternräte der Primarschule Affoltern am Albis: Butzen/Semper, Chilefeld/Stigeli und Zwillikon. Die Elternräte sind die Gremien der Elternmitwirkung der Schuleinheiten. Die Website ist kein Angebot der Schulverwaltung.</p>
+        <p>Kontakt: <a data-email href="#"></a></p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Elternrat</th><th>Verantwortlich für die Inhalte</th></tr></thead>
+            <tbody id="responsible"></tbody>
+          </table>
+        </div>
+      </section>
+      <section class="panel">
+        <h2>Datenschutz</h2>
+        <p>Diese Website setzt keine Cookies, verwendet keine Statistik- oder Werbedienste und bindet keine Inhalte von Facebook oder anderen sozialen Netzwerken ein. Links zu anderen Websites öffnen deren Seiten; dort gelten deren Datenschutzbestimmungen.</p>
+        <p>Wenn Sie ein Formular nutzen, werden Ihre Angaben per E-Mail an die gemeinsame Adresse der Elternräte gesendet. Wir verwenden sie nur für den Zweck, den Sie im Formular angeben, leiten sie an den Elternrat Ihrer Schuleinheit weiter und geben sie nicht an Dritte weiter. Angaben zu Einsätzen und Anlässen löschen wir spätestens am Ende des Schuljahres, sofern Sie nicht ausdrücklich in unserer Liste der Helferinnen und Helfer bleiben möchten.</p>
+        <p id="newsletter-privacy">Für den Newsletter speichern wir Ihre E-Mail-Adresse und die gewählten Schuleinheiten. Sie können sich jederzeit abmelden.</p>
+        <p>Sie können jederzeit Auskunft über Ihre gespeicherten Angaben verlangen und deren Berichtigung oder Löschung beantragen. Schreiben Sie dazu an <a data-email href="#"></a>.</p>
+      </section>
+    </section>
+
     <!-- Newsletter, auf jeder Seite sichtbar -->
     <section class="newsletter" id="newsletter">
       <div>
         <h2>Newsletter</h2>
-        <p>Einige Male pro Schuljahr: Anlässe, Projekte und Aufrufe des Elternrats direkt in Ihr Postfach.</p>
+        <p>Einige Male pro Schuljahr: Anlässe, Projekte und Aufrufe der Elternräte direkt in Ihr Postfach. Wählen Sie, aus welchen Schuleinheiten Sie informiert werden möchten.</p>
       </div>
       <form class="newsletter-form" id="newsletter-form">
         <label class="visually-hidden" for="nl-email">E-Mail-Adresse</label>
         <input id="nl-email" name="email" type="email" required placeholder="Ihre E-Mail-Adresse" autocomplete="email">
         <button type="submit" class="btn">Abonnieren</button>
+        <fieldset class="nl-units">
+          <legend>Informationen aus</legend>
+          <label class="check small"><input type="checkbox" name="einheiten" value="Butzen/Semper" checked> <span>Butzen/Semper</span></label>
+          <label class="check small"><input type="checkbox" name="einheiten" value="Chilefeld/Stigeli" checked> <span>Chilefeld/Stigeli</span></label>
+          <label class="check small"><input type="checkbox" name="einheiten" value="Zwillikon" checked> <span>Zwillikon</span></label>
+        </fieldset>
         <label class="check small"><input type="checkbox" name="einwilligung" required> <span>Ich möchte den Newsletter erhalten und kann mich jederzeit abmelden.</span></label>
         <p class="form-status" role="status" aria-live="polite"></p>
       </form>
@@ -476,11 +558,12 @@
 
   <footer class="site-footer">
     <div class="wrap footer-inner">
-      <p>Elternrat der Primarschule Affoltern am Albis</p>
+      <p>Elternräte der Primarschule Affoltern am Albis</p>
       <p class="footer-links">
         <a data-email href="#"></a>
         <a id="fb-footer" class="fb" href="#" target="_blank" rel="noopener" hidden>Facebook</a>
         <a href="#kontakt" data-tab="kontakt">Kontakt und Links</a>
+        <a href="#impressum" data-tab="impressum">Impressum und Datenschutz</a>
       </p>
     </div>
   </footer>

@@ -8,7 +8,7 @@
   const today = new Date().toISOString().slice(0, 10);
 
   // Navigation über Reiter, die Adresse (#elternbildung usw.) bleibt teilbar
-  const TABS = ['start', 'elternbildung', 'projekte', 'mithelfen', 'neu', 'so-gehts', 'kontakt'];
+  const TABS = ['start', 'elternbildung', 'projekte', 'mithelfen', 'neu', 'so-gehts', 'kontakt', 'impressum'];
   const menuBtn = $('.menu-btn');
   const nav = $('#nav');
 
@@ -46,43 +46,63 @@
   // Inhalte aus content.js
   const emptyNote = (text) => `<p class="empty">${esc(text)}</p>`;
 
+  // Kennzeichnung der Schuleinheit; ohne Angabe gilt ein Eintrag für alle
+  const unitOf = (x) => (x.schuleinheit && x.schuleinheit !== 'Alle' ? x.schuleinheit : 'Alle Schuleinheiten');
+  const unitTag = (x) => `<span class="tag">${esc(unitOf(x))}</span>`;
+  const matches = (x, unit) => !unit || unitOf(x) === unit || unitOf(x) === 'Alle Schuleinheiten';
+
   const news = (content.news || []).slice().sort((a, b) => String(b.datum).localeCompare(String(a.datum)));
   $('#news').innerHTML = news.length
-    ? news.map((n) => `<article class="item"><p class="meta">${esc(fmt(n.datum))}</p><h3>${esc(n.titel)}</h3><p>${esc(n.text)}</p></article>`).join('')
+    ? news.map((n) => `<article class="item"><p class="meta">${esc(fmt(n.datum))} ${unitTag(n)}</p><h3>${esc(n.titel)}</h3><p>${esc(n.text)}</p></article>`).join('')
     : emptyNote('Im Moment gibt es keine neuen Mitteilungen. Abonnieren Sie den Newsletter, dann verpassen Sie nichts.');
 
   const events = (content.events || []).filter((e) => !e.datum || e.datum >= today).sort((a, b) => String(a.datum).localeCompare(String(b.datum)));
-  $('#events').innerHTML = events.length
-    ? events
-        .map(
-          (e) => `<article class="card event">
-            <p class="meta">${esc(fmt(e.datum))}${e.zeit ? `, ${esc(e.zeit)}` : ''}${e.ort ? ` · ${esc(e.ort)}` : ''}</p>
-            <h3>${esc(e.titel)}</h3>
-            ${e.text ? `<p>${esc(e.text)}</p>` : ''}
-            ${e.anmeldung ? `<a class="btn btn-small" href="${mailto(`Anmeldung: ${e.titel}`, 'Ich melde mich an.\n\nName:\nAnzahl Personen:')}">Anmelden</a>` : ''}
-          </article>`
-        )
-        .join('')
-    : emptyNote('Die nächsten Anlässe werden bald bekannt gegeben. Schreiben Sie uns, welche Themen Sie interessieren.');
-
   const needs = content.needs || [];
-  $('#needs').innerHTML = needs.length
-    ? needs
-        .map(
-          (n) => `<article class="card need">
-            <p class="meta">${esc(fmt(n.datum))}</p>
-            <h3>${esc(n.titel)}</h3>
-            <p>${esc(n.text)}</p>
-            <a class="btn btn-small" href="#projekte" data-pick="${esc(n.titel)}">Ich helfe mit</a>
-          </article>`
-        )
-        .join('')
-    : emptyNote('Im Moment suchen wir keine Unterstützung für einen bestimmten Anlass. Melden Sie sich trotzdem gerne unter «Mithelfen».');
-
   const projects = content.projects || [];
-  $('#projects').innerHTML = projects.length
-    ? projects.map((p) => `<article class="card"><h3>${esc(p.titel)}</h3>${p.status ? `<p class="meta">${esc(p.status)}</p>` : ''}<p>${esc(p.text)}</p></article>`).join('')
-    : emptyNote('Die Projekte des Elternrats werden hier bald vorgestellt.');
+
+  function renderLists(unit = '') {
+    const ev = events.filter((e) => matches(e, unit));
+    $('#events').innerHTML = ev.length
+      ? ev
+          .map(
+            (e) => `<article class="card event">
+              <p class="meta">${esc(fmt(e.datum))}${e.zeit ? `, ${esc(e.zeit)}` : ''}${e.ort ? ` · ${esc(e.ort)}` : ''} ${unitTag(e)}</p>
+              <h3>${esc(e.titel)}</h3>
+              ${e.text ? `<p>${esc(e.text)}</p>` : ''}
+              ${e.anmeldung ? `<a class="btn btn-small" href="${mailto(`Anmeldung: ${e.titel} (${unitOf(e)})`, 'Ich melde mich an.\n\nName:\nAnzahl Personen:')}">Anmelden</a>` : ''}
+            </article>`
+          )
+          .join('')
+      : emptyNote(unit ? 'Für diese Schuleinheit sind im Moment keine Anlässe geplant.' : 'Die nächsten Anlässe werden bald bekannt gegeben. Schreiben Sie uns, welche Themen Sie interessieren.');
+
+    const nd = needs.filter((n) => matches(n, unit));
+    $('#needs').innerHTML = nd.length
+      ? nd
+          .map(
+            (n) => `<article class="card need">
+              <p class="meta">${esc(fmt(n.datum))} ${unitTag(n)}</p>
+              <h3>${esc(n.titel)}</h3>
+              <p>${esc(n.text)}</p>
+              <a class="btn btn-small" href="#projekte" data-pick="${esc(n.titel)}" data-pick-unit="${esc(n.schuleinheit || '')}">Ich helfe mit</a>
+            </article>`
+          )
+          .join('')
+      : emptyNote('Im Moment suchen wir keine Unterstützung für einen bestimmten Anlass. Melden Sie sich trotzdem gerne unter «Mithelfen».');
+
+    const pr = projects.filter((p) => matches(p, unit));
+    $('#projects').innerHTML = pr.length
+      ? pr.map((p) => `<article class="card"><p class="meta">${p.status ? `${esc(p.status)} ` : ''}${unitTag(p)}</p><h3>${esc(p.titel)}</h3><p>${esc(p.text)}</p></article>`).join('')
+      : emptyNote('Die Projekte der Elternräte werden hier bald vorgestellt.');
+  }
+
+  // Ein Filter gilt für beide Seiten, damit die Auswahl beim Wechseln erhalten bleibt
+  $$('[data-unit-filter]').forEach((sel) =>
+    sel.addEventListener('change', () => {
+      $$('[data-unit-filter]').forEach((s) => (s.value = sel.value));
+      renderLists(sel.value);
+    })
+  );
+  renderLists();
 
   const select = $('#project-select');
   for (const t of [...needs.map((n) => n.titel), ...projects.map((p) => p.titel)]) {
@@ -95,6 +115,8 @@
     if (!pick) return;
     e.preventDefault();
     select.value = pick.dataset.pick;
+    const unitSelect = $('select[name=schuleinheit]', select.closest('form'));
+    if (pick.dataset.pickUnit && pick.dataset.pickUnit !== 'Alle') unitSelect.value = pick.dataset.pickUnit;
     select.closest('form').scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
@@ -115,6 +137,12 @@
     $('#fb-contact').textContent = 'Eine Facebook-Seite des Elternrats ist in Vorbereitung.';
   }
 
+  // Impressum: Verantwortliche je Elternrat
+  const resp = config.verantwortliche || {};
+  $('#responsible').innerHTML = ['Butzen/Semper', 'Chilefeld/Stigeli', 'Zwillikon']
+    .map((u) => `<tr><td>${esc(u)}</td><td>${resp[u] ? esc(resp[u]) : '<span class="empty">wird ergänzt</span>'}</td></tr>`)
+    .join('');
+
   // Formulare: per Formulardienst senden oder als E-Mail öffnen
   const SUBJECTS = {
     themen: 'Themenvorschlag Elternbildung',
@@ -126,7 +154,7 @@
   const LABELS = {
     themen: 'Themen', vorschlag: 'Eigener Vorschlag', zeit: 'Bevorzugte Zeit', email: 'E-Mail', name: 'Name', projekt: 'Projekt',
     klasse: 'Klasse', nachricht: 'Nachricht', idee: 'Idee', telefon: 'Telefon', schuleinheit: 'Schuleinheit', bereiche: 'Bereiche',
-    haeufigkeit: 'Wie oft', sprachen: 'Sprachen', art: 'Anliegen',
+    haeufigkeit: 'Wie oft', sprachen: 'Sprachen', art: 'Anliegen', einheiten: 'Schuleinheiten',
   };
 
   function collect(form) {
@@ -165,7 +193,8 @@
       }
       try {
         status.className = 'form-status ok';
-        status.textContent = await deliver(SUBJECTS[form.dataset.form], data);
+        const unit = data.schuleinheit && !['Alle Schuleinheiten', 'Weiss ich noch nicht'].includes(data.schuleinheit) ? data.schuleinheit : 'Alle';
+        status.textContent = await deliver(`[${unit}] ${SUBJECTS[form.dataset.form]}`, data);
         if (config.formEndpoint) form.reset();
       } catch (err) {
         status.className = 'form-status error';
@@ -180,6 +209,12 @@
     const form = e.target;
     const status = $('.form-status', form);
     const email = form.email.value.trim();
+    const units = $$('input[name=einheiten]:checked', form).map((i) => i.value);
+    if (!units.length) {
+      status.className = 'form-status error';
+      status.textContent = 'Bitte wählen Sie mindestens eine Schuleinheit.';
+      return;
+    }
     if (config.newsletterAction) {
       const f = document.createElement('form');
       f.method = 'post';
@@ -190,13 +225,20 @@
       input.name = config.newsletterEmailField || 'EMAIL';
       input.value = email;
       f.append(input);
+      if (config.newsletterUnitsField) {
+        const unitsInput = document.createElement('input');
+        unitsInput.type = 'hidden';
+        unitsInput.name = config.newsletterUnitsField;
+        unitsInput.value = units.join(', ');
+        f.append(unitsInput);
+      }
       document.body.append(f);
       f.submit();
       f.remove();
       status.className = 'form-status ok';
       status.textContent = 'Fast geschafft: Bitte bestätigen Sie die Anmeldung über den Link in der E-Mail, die Sie gleich erhalten.';
     } else {
-      location.href = mailto('Anmeldung Newsletter', `Bitte nehmen Sie mich in den Newsletter des Elternrats auf.\n\nE-Mail: ${email}`);
+      location.href = mailto('Anmeldung Newsletter', `Bitte nehmen Sie mich in den Newsletter der Elternräte auf.\n\nE-Mail: ${email}\nSchuleinheiten: ${units.join(', ')}`);
       status.className = 'form-status ok';
       status.textContent = 'Ihr E-Mail-Programm öffnet sich mit der Anmeldung. Bitte senden Sie die Nachricht dort ab.';
     }

@@ -133,6 +133,22 @@ main { outline: none; padding-bottom: 40px; }
 .tutorial h2 { margin: 2px 0 6px; font-size: 1.12rem; }
 .tutorial li > :last-child { margin-bottom: 0; }
 
+/* Schuleinheiten */
+.units { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 8px; }
+.unit-card { display: flex; flex-direction: column; gap: 4px; padding: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; text-decoration: none; color: var(--text); }
+.unit-card strong { font-size: 1.1rem; color: var(--primary); }
+.unit-card span { color: var(--muted); font-size: .93rem; }
+.unit-card small { color: var(--muted); font-size: .8rem; margin-top: auto; padding-top: 6px; }
+.unit-card:hover { border-color: var(--primary); }
+.tag { display: inline-block; font-size: .76rem; font-weight: 650; padding: 1px 8px; border-radius: 99px; background: var(--primary-soft); color: var(--primary); vertical-align: middle; }
+.unit-filter { max-width: 280px; margin: 8px 0 4px; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+th { font-size: .82rem; color: var(--muted); }
+.nl-units { grid-column: 1 / -1; border-color: rgba(255, 255, 255, .35); display: flex; flex-wrap: wrap; gap: 4px 16px; padding: 6px 12px 8px; }
+.nl-units legend { font-size: .85rem; font-weight: 600; }
+
 /* Formulare */
 .form { display: grid; gap: 14px; max-width: 760px; }
 .row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
