@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Elternrat Primarschule Affoltern am Albis</title>
+  <meta name="description" content="Elternrat der Primarschule Affoltern am Albis: Elternbildung, Projekte, Mithelfen, Informationen für neue Familien und Newsletter.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#inhalt">Zum Inhalt springen</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#start" data-tab="start">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>
+          <span class="brand-title">Elternrat</span>
+          <span class="brand-sub">Primarschule Affoltern am Albis</span>
+        </span>
+      </a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menü</button>
+    </div>
+    <nav class="wrap nav" id="nav" aria-label="Hauptnavigation">
+      <a href="#start" data-tab="start">Start</a>
+      <a href="#elternbildung" data-tab="elternbildung">Elternbildung</a>
+      <a href="#projekte" data-tab="projekte">Projekte</a>
+      <a href="#mithelfen" data-tab="mithelfen">Mithelfen</a>
+      <a href="#neu" data-tab="neu">Neu an der Schule</a>
+      <a href="#so-gehts" data-tab="so-gehts">So geht's</a>
+      <a href="#kontakt" data-tab="kontakt">Kontakt und Links</a>
+    </nav>
+  </header>
+
+  <main id="inhalt" class="wrap" tabindex="-1">
+
+    <!-- Start -->
+    <section class="tab" id="tab-start" data-section="start">
+      <div class="hero">
+        <h1>Gemeinsam für eine gute Schule</h1>
+        <p class="lead">Wir sind Eltern, die sich im Elternrat für ein gutes Miteinander von Familien und Schule einsetzen. Hier finden Sie unsere Angebote, Projekte und alle Wege, wie Sie mitmachen können.</p>
+        <p class="actions">
+          <a class="btn" href="#mithelfen" data-tab="mithelfen">Ich möchte helfen</a>
+          <a class="btn btn-ghost" href="#neu" data-tab="neu">Wir sind neu hier</a>
+        </p>
+      </div>
+
+      <div class="tiles">
+        <a class="tile t1" href="#elternbildung" data-tab="elternbildung">
+          <strong>Elternbildung</strong>
+          <span>Vorträge und Kurse für Eltern. Schreiben Sie uns, welche Themen Sie interessieren.</span>
+        </a>
+        <a class="tile t2" href="#projekte" data-tab="projekte">
+          <strong>Projekte</strong>
+          <span>Was wir mit der Schule umsetzen und wofür wir Unterstützung suchen.</span>
+        </a>
+        <a class="tile t3" href="#mithelfen" data-tab="mithelfen">
+          <strong>Mithelfen</strong>
+          <span>Eine Stunde im Jahr hilft schon. Sagen Sie uns, wobei Sie dabei sein möchten.</span>
+        </a>
+        <a class="tile t4" href="#neu" data-tab="neu">
+          <strong>Neu an der Schule?</strong>
+          <span>Erklärungen, Ansprechpersonen und die ersten Schritte für neue Familien.</span>
+        </a>
+      </div>
+
+      <div class="grid-2">
+        <section class="panel">
+          <h2>Wer wir sind</h2>
+          <p>Die Primarschule Affoltern am Albis hat drei Schuleinheiten mit je einem Elternrat: Butzen/Semper, Chilefeld/Stigeli und Zwillikon. Im Elternrat arbeiten Delegierte aus den Klassen mit. Sie werden in der Regel am Elternabend gewählt.</p>
+          <p>Wir fördern den Austausch zwischen Eltern und Schule, organisieren Anlässe und Elternbildung, unterstützen Projekte und heissen neue Familien willkommen.</p>
+          <p class="note-line">Personelle Fragen, Unterricht, Lehrplan, Lehrmittel, Stundenplan und die Einteilung in Klassen gehören nach § 55 des Volksschulgesetzes des Kantons Zürich nicht zur Elternmitwirkung. Dafür sind die Klassenlehrperson und die Schulleitung zuständig.</p>
+        </section>
+        <section class="panel">
+          <h2>Aktuell</h2>
+          <div id="news"></div>
+        </section>
+      </div>
+    </section>
+
+    <!-- Elternbildung -->
+    <section class="tab" id="tab-elternbildung" data-section="elternbildung" hidden>
+      <h1>Elternbildung</h1>
+      <p class="lead">Kinder wachsen, Fragen wachsen mit. Wir organisieren Vorträge und Austauschabende zu Themen, die Eltern beschäftigen, und sammeln gute Angebote aus der Region.</p>
+
+      <h2>Unsere nächsten Anlässe</h2>
+      <div id="events"></div>
+
+      <section class="panel">
+        <h2>Schreiben Sie uns Ihre Themen</h2>
+        <p>Welche Themen interessieren Sie? Je mehr Eltern sich melden, desto besser können wir planen.</p>
+        <form class="form" data-form="themen">
+          <fieldset>
+            <legend>Themen, die mich interessieren</legend>
+            <div class="check-grid">
+              <label class="check"><input type="checkbox" name="themen" value="Kinder und Medien, Handy, Bildschirmzeit"> <span>Kinder und Medien, Handy, Bildschirmzeit</span></label>
+              <label class="check"><input type="checkbox" name="themen" value="Lernen zu Hause und Hausaufgaben"> <span>Lernen zu Hause und Hausaufgaben</span></label>
+              <label class="check"><input type="checkbox" name="themen" value="Mobbing und Konflikte unter Kindern"> <span>Mobbing und Konflikte unter Kindern</span></label>
+              <label class="check"><input type="checkbox" name="themen" value="Übertritt in die Sekundarschule"> <span>Übertritt in die Sekundarschule</span></label>
+              <label class="check"><input type="checkbox" name="themen" value="Mehrsprachigkeit in der Familie"> <span>Mehrsprachigkeit in der Familie</span></label>
+              <label class="check"><input type="checkbox" name="themen" value="Ernährung und Bewegung"> <span>Ernährung und Bewegung</span></label>
+              <label class="check"><input type="checkbox" name="themen" value="Taschengeld und Umgang mit Geld"> <span>Taschengeld und Umgang mit Geld</span></label>
+              <label class="check"><input type="checkbox" name="themen" value="Erste Hilfe bei Kindern"> <span>Erste Hilfe bei Kindern</span></label>
+              <label class="check"><input type="checkbox" name="themen" value="Grenzen setzen und Erziehung im Alltag"> <span>Grenzen setzen und Erziehung im Alltag</span></label>
+            </div>
+          </fieldset>
+          <label>Eigener Vorschlag <span class="hint">freiwillig</span><textarea name="vorschlag" rows="3" maxlength="1500"></textarea></label>
+          <div class="row">
+            <label>Welche Zeit passt Ihnen am besten?
+              <select name="zeit">
+                <option value="">keine Angabe</option>
+                <option>Unter der Woche, abends</option>
+                <option>Samstagvormittag</option>
+                <option>Online</option>
+              </select>
+            </label>
+            <label>E-Mail <span class="hint">freiwillig, falls wir Sie einladen dürfen</span><input name="email" type="email" maxlength="200" autocomplete="email"></label>
+          </div>
+          <button type="submit" class="btn">Themen senden</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <h2>Angebote für Eltern in der Region und in der Schweiz</h2>
+      <p class="meta">Eine Auswahl öffentlicher und gemeinnütziger Angebote. Kursdaten und Preise finden Sie jeweils auf den Seiten der Anbieter.</p>
+      <div class="link-grid">
+        <a class="link-card" href="https://www.elternbildung.ch/agenda" target="_blank" rel="noopener">
+          <strong>Elternbildung CH</strong>
+          <span>Dachverband der Elternbildung in der Schweiz mit Agenda für Kurse und Vorträge, auch online.</span>
+          <small>elternbildung.ch</small>
+        </a>
+        <a class="link-card" href="https://www.zh.ch/de/familie/angebote-fuer-familien-mit-kindern/elternbildung/kurse-und-veranstaltungen.html" target="_blank" rel="noopener">
+          <strong>Elternbildung Kanton Zürich</strong>
+          <span>Kurse und Veranstaltungen für Eltern im Kanton Zürich, zusammengestellt von der kantonalen Geschäftsstelle Elternbildung.</span>
+          <small>zh.ch</small>
+        </a>
+        <a class="link-card" href="https://www.zh.ch/de/familie/angebote-fuer-familien-mit-kindern/elternbildung/kantonale-elternbildungsangebote.html" target="_blank" rel="noopener">
+          <strong>Angebote für fremdsprachige Eltern</strong>
+          <span>Kantonale Programme wie «Startklar» und «Deutsch für Eltern» sowie Femmes-Tische und Männer-Tische.</span>
+          <small>zh.ch</small>
+        </a>
+        <a class="link-card" href="https://www.femmestische.ch" target="_blank" rel="noopener">
+          <strong>Femmes-Tische und Männer-Tische</strong>
+          <span>Moderierte Gesprächsrunden in kleinen Gruppen, oft in der Muttersprache der Teilnehmenden. Informationen in vielen Sprachen.</span>
+          <small>femmestische.ch</small>
+        </a>
+        <a class="link-card" href="https://www.kinderschutz.ch" target="_blank" rel="noopener">
+          <strong>Elternkurs «Starke Eltern – Starke Kinder»</strong>
+          <span>Kurs von Kinderschutz Schweiz zu Erziehung im Alltag und gewaltfreier Konfliktlösung, vor Ort und online.</span>
+          <small>kinderschutz.ch</small>
+        </a>
+        <a class="link-card" href="https://www.jugendundmedien.ch" target="_blank" rel="noopener">
+          <strong>Jugend und Medien</strong>
+          <span>Plattform des Bundes zur Medienkompetenz mit Tipps für Eltern nach Alter der Kinder.</span>
+          <small>jugendundmedien.ch</small>
+        </a>
+        <a class="link-card" href="https://www.projuventute.ch/de/elternberatung" target="_blank" rel="noopener">
+          <strong>Pro Juventute Elternberatung</strong>
+          <span>Beratung für Eltern rund um die Uhr sowie die Elternbriefe für die ersten Lebensjahre.</span>
+          <small>projuventute.ch</small>
+        </a>
+        <a class="link-card" href="https://keo-zh.ch" target="_blank" rel="noopener">
+          <strong>KEO Kanton Zürich</strong>
+          <span>Kantonale Elternmitwirkungsorganisation mit Weiterbildungen und Austausch für Elternräte.</span>
+          <small>keo-zh.ch</small>
+        </a>
+      </div>
+    </section>
+
+    <!-- Projekte -->
+    <section class="tab" id="tab-projekte" data-section="projekte" hidden>
+      <h1>Projekte</h1>
+      <p class="lead">Gemeinsam mit der Schule setzen wir Projekte um, die den Kindern und Familien zugutekommen. Für einige suchen wir noch Unterstützung.</p>
+
+      <h2>Wir suchen Unterstützung</h2>
+      <div id="needs"></div>
+
+      <h2>Aktuelle Projekte</h2>
+      <div id="projects"></div>
+
+      <section class="panel">
+        <h2>Melden Sie sich, wenn Sie helfen möchten</h2>
+        <form class="form" data-form="projekt">
+          <div class="row">
+            <label>Name <input name="name" required maxlength="120" autocomplete="name"></label>
+            <label>E-Mail <input name="email" type="email" required maxlength="200" autocomplete="email"></label>
+          </div>
+          <div class="row">
+            <label>Bei welchem Projekt?
+              <select name="projekt" id="project-select"><option value="Allgemein">Ich bin offen für alles</option></select>
+            </label>
+            <label>Klasse Ihres Kindes <span class="hint">freiwillig</span><input name="klasse" maxlength="40"></label>
+          </div>
+          <label>Nachricht <span class="hint">freiwillig</span><textarea name="nachricht" rows="3" maxlength="1500"></textarea></label>
+          <label class="check"><input type="checkbox" name="einwilligung" required> <span>Ich bin einverstanden, dass der Elternrat meine Angaben für die Organisation dieses Projekts verwendet.</span></label>
+          <button type="submit" class="btn">Ich helfe mit</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="panel">
+        <h2>Haben Sie eine Projektidee?</h2>
+        <p>Schreiben Sie uns, was Sie sich für die Schule wünschen und wie Sie sich die Umsetzung vorstellen. Wir besprechen jede Idee an unserer nächsten Sitzung und geben Ihnen Rückmeldung.</p>
+        <form class="form" data-form="idee">
+          <label>Ihre Idee <textarea name="idee" required rows="4" maxlength="2000"></textarea></label>
+          <div class="row">
+            <label>Name <span class="hint">freiwillig</span><input name="name" maxlength="120" autocomplete="name"></label>
+            <label>E-Mail <span class="hint">für unsere Rückmeldung</span><input name="email" type="email" maxlength="200" autocomplete="email"></label>
+          </div>
+          <button type="submit" class="btn">Idee senden</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </section>
+
+    <!-- Mithelfen -->
+    <section class="tab" id="tab-mithelfen" data-section="mithelfen" hidden>
+      <h1>Möchten Sie der Schule helfen?</h1>
+      <p class="lead">Nicht alle haben Zeit für ein Amt im Elternrat. Viele können aber ab und zu eine Stunde helfen, einen Kuchen backen oder etwas übersetzen. Sagen Sie uns, wobei wir Sie anfragen dürfen. Sie entscheiden jedes Mal selbst, ob es passt.</p>
+
+      <div class="help-grid">
+        <div class="help-card"><strong>Anlässe</strong><span>Aufbau, Standbetreuung oder Aufräumen bei Sporttag, Räbeliechtli, Flohmarkt und Festen.</span></div>
+        <div class="help-card"><strong>Backen und Verpflegung</strong><span>Ein Kuchen für den Kuchenstand oder Hilfe bei einer Znüni-Aktion.</span></div>
+        <div class="help-card"><strong>Übersetzen</strong><span>Kurz für eine Familie übersetzen, die noch wenig Deutsch spricht.</span></div>
+        <div class="help-card"><strong>Begleitung</strong><span>Klassen bei Ausflügen begleiten oder den Schulweg sicherer machen.</span></div>
+        <div class="help-card"><strong>Beruf und Hobby zeigen</strong><span>Den Kindern bei einer Projektwoche den eigenen Beruf oder ein Hobby vorstellen.</span></div>
+        <div class="help-card"><strong>Im Elternrat mitwirken</strong><span>Als Delegierte oder Delegierter die Eltern Ihrer Klasse vertreten.</span></div>
+      </div>
+
+      <section class="panel">
+        <h2>Ich helfe gerne</h2>
+        <form class="form" data-form="helfen">
+          <div class="row">
+            <label>Name <input name="name" required maxlength="120" autocomplete="name"></label>
+            <label>E-Mail <input name="email" type="email" required maxlength="200" autocomplete="email"></label>
+          </div>
+          <div class="row">
+            <label>Telefon <span class="hint">freiwillig</span><input name="telefon" type="tel" maxlength="40" autocomplete="tel"></label>
+            <label>Schuleinheit
+              <select name="schuleinheit">
+                <option>Butzen/Semper</option>
+                <option>Chilefeld/Stigeli</option>
+                <option>Zwillikon</option>
+              </select>
+            </label>
+          </div>
+          <fieldset>
+            <legend>Wobei dürfen wir Sie anfragen?</legend>
+            <div class="check-grid">
+              <label class="check"><input type="checkbox" name="bereiche" value="Anlässe"> <span>Anlässe</span></label>
+              <label class="check"><input type="checkbox" name="bereiche" value="Backen und Verpflegung"> <span>Backen und Verpflegung</span></label>
+              <label class="check"><input type="checkbox" name="bereiche" value="Übersetzen"> <span>Übersetzen</span></label>
+              <label class="check"><input type="checkbox" name="bereiche" value="Begleitung"> <span>Begleitung</span></label>
+              <label class="check"><input type="checkbox" name="bereiche" value="Beruf oder Hobby zeigen"> <span>Beruf oder Hobby zeigen</span></label>
+              <label class="check"><input type="checkbox" name="bereiche" value="Handwerk und Basteln"> <span>Handwerk und Basteln</span></label>
+              <label class="check"><input type="checkbox" name="bereiche" value="IT und Technik"> <span>IT und Technik</span></label>
+              <label class="check"><input type="checkbox" name="bereiche" value="Interesse am Elternrat"> <span>Interesse am Elternrat</span></label>
+            </div>
+          </fieldset>
+          <div class="row">
+            <label>Wie oft?
+              <select name="haeufigkeit">
+                <option>Einmal pro Jahr</option>
+                <option>Ab und zu eine Stunde</option>
+                <option>Regelmässig</option>
+              </select>
+            </label>
+            <label>Sprachen, die Sie sprechen <span class="hint">freiwillig</span><input name="sprachen" maxlength="120"></label>
+          </div>
+          <label class="check"><input type="checkbox" name="einwilligung" required> <span>Ich bin einverstanden, dass der Elternrat mich für passende Einsätze kontaktiert. Ich kann mich jederzeit wieder abmelden.</span></label>
+          <button type="submit" class="btn">Anmelden</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </section>
+
+    <!-- Neu an der Schule -->
+    <section class="tab" id="tab-neu" data-section="neu" hidden>
+      <h1>Neu an der Schule?</h1>
+      <p class="lead">Herzlich willkommen in Affoltern am Albis! Der Anfang an einer neuen Schule wirft viele Fragen auf. Hier finden Sie die wichtigsten Antworten und Menschen, die Ihnen gerne weiterhelfen.</p>
+
+      <div class="panel info">
+        <p><strong>Andere Sprache?</strong> Sie können diese Seite in Ihrer Sprache lesen. In Chrome und Edge klicken Sie mit der rechten Maustaste und wählen «Übersetzen». In Safari auf dem iPhone tippen Sie auf «Aa» in der Adresszeile und dann auf «Website übersetzen».</p>
+      </div>
+
+      <h2>Die ersten Schritte</h2>
+      <ol class="steps-list">
+        <li><strong>Klassenlehrperson kennenlernen.</strong> Sie ist Ihre erste Ansprechperson für alle Fragen zu Ihrem Kind.</li>
+        <li><strong>Elternabend besuchen.</strong> Dort erfahren Sie, wie das Schuljahr abläuft, und lernen andere Eltern kennen.</li>
+        <li><strong>Newsletter abonnieren.</strong> So verpassen Sie keine Anlässe des Elternrats.</li>
+        <li><strong>Eine Buddy-Familie finden.</strong> Eine Familie, die schon länger hier ist, beantwortet Ihre Fragen und begleitet Sie beim ersten Anlass.</li>
+      </ol>
+
+      <h2>Kleines ABC</h2>
+      <dl class="glossary">
+        <div><dt>Klassenlehrperson</dt><dd>Die Lehrerin oder der Lehrer, die oder der für die Klasse verantwortlich ist. Erste Ansprechperson für Eltern.</dd></div>
+        <div><dt>Schulleitung</dt><dd>Leitet eine Schuleinheit. Nächste Ansprechstelle, wenn eine Frage mit der Klassenlehrperson nicht geklärt werden kann.</dd></div>
+        <div><dt>Elternabend</dt><dd>Informationsabend der Klassenlehrperson für die Eltern einer Klasse, meist zu Beginn des Schuljahres.</dd></div>
+        <div><dt>Elternrat</dt><dd>Eltern, die gemeinsam mit der Schule Anlässe und Projekte organisieren und die Anliegen der Eltern einbringen.</dd></div>
+        <div><dt>Znüni</dt><dd>Kleine Zwischenmahlzeit in der Vormittagspause, zum Beispiel Obst, Gemüse oder Brot.</dd></div>
+        <div><dt>Schulergänzende Betreuung</dt><dd>Betreuung vor und nach dem Unterricht und über Mittag. Auskunft gibt die Schulverwaltung.</dd></div>
+      </dl>
+      <p>Weitere Begriffe und Regeln erklärt die Schule im <a href="https://www.psa.ch/elternabc" target="_blank" rel="noopener">ABC der Primarschule Affoltern am Albis</a>.</p>
+
+      <section class="panel">
+        <h2>Eltern-Buddy</h2>
+        <p>Möchten Sie von einer Familie begleitet werden, die schon länger hier lebt? Oder möchten Sie selbst eine neue Familie begleiten? Melden Sie sich bei uns.</p>
+        <form class="form" data-form="buddy">
+          <fieldset>
+            <legend>Ich möchte …</legend>
+            <label class="check"><input type="radio" name="art" value="Wir sind neu und möchten begleitet werden" checked> <span>… begleitet werden. Wir sind neu hier.</span></label>
+            <label class="check"><input type="radio" name="art" value="Wir begleiten gerne eine neue Familie"> <span>… eine neue Familie begleiten.</span></label>
+          </fieldset>
+          <div class="row">
+            <label>Name <input name="name" required maxlength="120" autocomplete="name"></label>
+            <label>E-Mail <input name="email" type="email" required maxlength="200" autocomplete="email"></label>
+          </div>
+          <div class="row">
+            <label>Sprachen <span class="hint">zum Beispiel Deutsch, Portugiesisch</span><input name="sprachen" maxlength="120"></label>
+            <label>Schuleinheit
+              <select name="schuleinheit">
+                <option>Butzen/Semper</option>
+                <option>Chilefeld/Stigeli</option>
+                <option>Zwillikon</option>
+              </select>
+            </label>
+          </div>
+          <label class="check"><input type="checkbox" name="einwilligung" required> <span>Ich bin einverstanden, dass der Elternrat meinen Namen und meine E-Mail-Adresse an die vermittelte Familie weitergibt.</span></label>
+          <button type="submit" class="btn">Eintragen</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <h2>Hilfe und Beratung</h2>
+      <ul class="plain">
+        <li><strong>kjz Affoltern</strong> (Kinder- und Jugendhilfezentrum): kostenlose und vertrauliche Erziehungs-, Familien- sowie Mütter- und Väterberatung. Im Winkel 2, 8910 Affoltern am Albis, Telefon 043 259 93 33. <a href="https://www.zh.ch/de/bildungsdirektion/amt-fuer-jugend-und-berufsberatung/kjz-affoltern.html" target="_blank" rel="noopener">Website</a></li>
+        <li><strong>Elternnotruf</strong>: Beratung rund um die Uhr, Telefon 0848 35 45 55. <a href="https://www.elternnotruf.ch" target="_blank" rel="noopener">elternnotruf.ch</a></li>
+        <li><strong>Pro Juventute Elternberatung</strong>: Telefon 058 261 61 61, rund um die Uhr. <a href="https://www.projuventute.ch/de/elternberatung" target="_blank" rel="noopener">projuventute.ch</a></li>
+      </ul>
+    </section>
+
+    <!-- So geht's -->
+    <section class="tab" id="tab-so-gehts" data-section="so-gehts" hidden>
+      <h1>So geht's</h1>
+      <p class="lead">Eine kurze Anleitung zu dieser Website und dazu, wie Sie sich einbringen können.</p>
+
+      <ol class="tutorial">
+        <li>
+          <h2>Informiert bleiben</h2>
+          <p>Abonnieren Sie unten auf jeder Seite unseren Newsletter. Sie erhalten einige Male pro Schuljahr eine E-Mail mit Anlässen, Projekten und Aufrufen. Die Abmeldung ist jederzeit mit einem Klick möglich.</p>
+          <a class="btn btn-small btn-ghost" href="#newsletter">Zum Newsletter</a>
+        </li>
+        <li>
+          <h2>Elternbildung</h2>
+          <p>Unter «Elternbildung» finden Sie unsere nächsten Vorträge und Angebote aus der Region. Mit dem Formular sagen Sie uns, welche Themen Sie interessieren. Daraus planen wir die nächsten Anlässe.</p>
+          <a class="btn btn-small btn-ghost" href="#elternbildung" data-tab="elternbildung">Zur Elternbildung</a>
+        </li>
+        <li>
+          <h2>Bei einem Projekt helfen</h2>
+          <p>Unter «Projekte» steht, wofür wir gerade Unterstützung suchen, zum Beispiel: «Sporttag, 6 Personen von 8 bis 12 Uhr». Wählen Sie das Projekt im Formular aus und senden Sie es ab. Wir melden uns mit allen Details.</p>
+          <a class="btn btn-small btn-ghost" href="#projekte" data-tab="projekte">Zu den Projekten</a>
+        </li>
+        <li>
+          <h2>Sich als Helferin oder Helfer melden</h2>
+          <p>Unter «Mithelfen» geben Sie an, wobei wir Sie anfragen dürfen und wie oft. Wir schreiben Ihnen dann nur, wenn etwas zu Ihnen passt. Ein Nein ist immer in Ordnung.</p>
+          <a class="btn btn-small btn-ghost" href="#mithelfen" data-tab="mithelfen">Zum Mithelfen</a>
+        </li>
+        <li>
+          <h2>Eine Idee oder ein Anliegen einbringen</h2>
+          <p>Ideen für die Schule senden Sie unter «Projekte». Wir besprechen jede Idee an unserer Sitzung und geben Rückmeldung. Fragen zu Ihrem Kind, zu Lehrpersonen oder zum Unterricht klären Sie bitte mit der Klassenlehrperson oder der Schulleitung.</p>
+        </li>
+        <li>
+          <h2>Im Elternrat mitwirken</h2>
+          <p>Die Delegierten werden in der Regel am Elternabend Ihrer Klasse gewählt. Wenn Sie sich vorstellen können mitzumachen, kreuzen Sie unter «Mithelfen» das Feld «Interesse am Elternrat» an. Wir melden uns vor dem Elternabend bei Ihnen.</p>
+        </li>
+        <li>
+          <h2>Was passiert mit meinen Angaben?</h2>
+          <p>Die Formulare senden Ihre Angaben per E-Mail an den Elternrat. Wir verwenden sie nur für den angegebenen Zweck und geben sie nicht weiter. Auf Wunsch löschen wir sie jederzeit.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- Kontakt und Links -->
+    <section class="tab" id="tab-kontakt" data-section="kontakt" hidden>
+      <h1>Kontakt und Links</h1>
+
+      <div class="grid-2">
+        <section class="panel">
+          <h2>Elternrat</h2>
+          <p>Schreiben Sie uns: <a data-email href="#"></a></p>
+          <p id="fb-contact"></p>
+          <p>Die drei Elternräte auf der Website der Schule:</p>
+          <ul class="plain">
+            <li><a href="https://www.psa.ch/sebutzenfs" target="_blank" rel="noopener">Elternrat Butzen/Semper</a></li>
+            <li><a href="https://www.psa.ch/sechilefeldfs" target="_blank" rel="noopener">Elternrat Chilefeld/Stigeli</a></li>
+            <li><a href="https://psa.ch/de/schule/elternbildung/sezwillikonfs" target="_blank" rel="noopener">Elternrat Zwillikon</a></li>
+          </ul>
+        </section>
+
+        <section class="panel">
+          <h2>Primarschule Affoltern am Albis</h2>
+          <address>
+            Schulverwaltung<br>
+            Obere Seewadelstrasse 14<br>
+            8910 Affoltern am Albis<br>
+            Telefon <a href="tel:+41433226010">043 322 60 10</a><br>
+            <a href="mailto:primarschule@stadtaffoltern.ch">primarschule@stadtaffoltern.ch</a>
+          </address>
+          <p class="meta">Öffnungszeiten laut Website der Schule: Montag bis Freitag 8.00 bis 11.30 Uhr, Montag und Donnerstag zusätzlich 13.30 bis 17.00 Uhr.</p>
+          <p><a href="https://www.psa.ch" target="_blank" rel="noopener">psa.ch</a> · <a href="https://www.psa.ch/elternabc" target="_blank" rel="noopener">ABC der Schule</a></p>
+        </section>
+      </div>
+
+      <h2>Wichtige Adressen</h2>
+      <div class="link-grid">
+        <a class="link-card" href="https://www.zh.ch/de/bildungsdirektion/amt-fuer-jugend-und-berufsberatung/kjz-affoltern.html" target="_blank" rel="noopener">
+          <strong>kjz Affoltern</strong>
+          <span>Erziehungs-, Familien- sowie Mütter- und Väterberatung. Im Winkel 2, 8910 Affoltern am Albis, 043 259 93 33.</span>
+          <small>zh.ch</small>
+        </a>
+        <a class="link-card" href="https://www.stadtaffoltern.ch/lebenssituationen/62587" target="_blank" rel="noopener">
+          <strong>Stadt Affoltern am Albis: Familie und Kinder</strong>
+          <span>Angebote und Anlaufstellen für Familien in Affoltern.</span>
+          <small>stadtaffoltern.ch</small>
+        </a>
+        <a class="link-card" href="https://www.elternnotruf.ch" target="_blank" rel="noopener">
+          <strong>Elternnotruf</strong>
+          <span>Beratung für Eltern rund um die Uhr, 0848 35 45 55.</span>
+          <small>elternnotruf.ch</small>
+        </a>
+        <a class="link-card" href="https://www.projuventute.ch/de/elternberatung" target="_blank" rel="noopener">
+          <strong>Pro Juventute Elternberatung</strong>
+          <span>Beratung rund um die Uhr, 058 261 61 61.</span>
+          <small>projuventute.ch</small>
+        </a>
+        <a class="link-card" href="https://www.elternbildung.ch" target="_blank" rel="noopener">
+          <strong>Elternbildung CH</strong>
+          <span>Kurse, Vorträge und Informationen für Eltern in der ganzen Schweiz.</span>
+          <small>elternbildung.ch</small>
+        </a>
+        <a class="link-card" href="https://www.zh.ch/de/familie/angebote-fuer-familien-mit-kindern/elternbildung.html" target="_blank" rel="noopener">
+          <strong>Elternbildung Kanton Zürich</strong>
+          <span>Kantonale Angebote und Kursübersicht für Eltern.</span>
+          <small>zh.ch</small>
+        </a>
+        <a class="link-card" href="https://keo-zh.ch" target="_blank" rel="noopener">
+          <strong>KEO Kanton Zürich</strong>
+          <span>Dachorganisation der Elternmitwirkung im Kanton Zürich.</span>
+          <small>keo-zh.ch</small>
+        </a>
+        <a class="link-card" href="https://www.jugendundmedien.ch" target="_blank" rel="noopener">
+          <strong>Jugend und Medien</strong>
+          <span>Medienkompetenz: Tipps für Eltern.</span>
+          <small>jugendundmedien.ch</small>
+        </a>
+      </div>
+      <p class="meta">Notfall: Polizei 117, Sanität 144, Beratung für Kinder und Jugendliche 147.</p>
+    </section>
+
+    <!-- Newsletter, auf jeder Seite sichtbar -->
+    <section class="newsletter" id="newsletter">
+      <div>
+        <h2>Newsletter</h2>
+        <p>Einige Male pro Schuljahr: Anlässe, Projekte und Aufrufe des Elternrats direkt in Ihr Postfach.</p>
+      </div>
+      <form class="newsletter-form" id="newsletter-form">
+        <label class="visually-hidden" for="nl-email">E-Mail-Adresse</label>
+        <input id="nl-email" name="email" type="email" required placeholder="Ihre E-Mail-Adresse" autocomplete="email">
+        <button type="submit" class="btn">Abonnieren</button>
+        <label class="check small"><input type="checkbox" name="einwilligung" required> <span>Ich möchte den Newsletter erhalten und kann mich jederzeit abmelden.</span></label>
+        <p class="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p>Elternrat der Primarschule Affoltern am Albis</p>
+      <p class="footer-links">
+        <a data-email href="#"></a>
+        <a id="fb-footer" class="fb" href="#" target="_blank" rel="noopener" hidden>Facebook</a>
+        <a href="#kontakt" data-tab="kontakt">Kontakt und Links</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="content.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
