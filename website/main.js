@@ -25,6 +25,10 @@
         full: 'Fully booked, thank you!',
         shift: 'Shift',
         more: 'More information',
+        noDates: 'No dates have been entered yet.',
+        showAll: 'Show all dates',
+        showLess: 'Show fewer dates',
+        joinIdea: 'I would like to join',
         fbFollow: 'Follow us on',
         fbSoon: 'A Facebook page of the parent councils is being prepared.',
         tbd: 'to be added',
@@ -52,6 +56,10 @@
         full: 'Ausgebucht, vielen Dank!',
         shift: 'Schicht',
         more: 'Mehr erfahren',
+        noDates: 'Es sind noch keine Termine eingetragen.',
+        showAll: 'Alle Termine anzeigen',
+        showLess: 'Weniger Termine anzeigen',
+        joinIdea: 'Ich mache mit',
         fbFollow: 'Folgen Sie uns auf',
         fbSoon: 'Eine Facebook-Seite der Elternräte ist in Vorbereitung.',
         tbd: 'wird ergänzt',
@@ -123,6 +131,32 @@
     ? news.map((n) => `<article class="item"><p class="meta">${esc(fmt(n.datum))} ${unitTag(n)}</p><h3>${esc(tx(n, 'titel'))}</h3><p>${esc(tx(n, 'text'))}</p></article>`).join('')
     : emptyNote(T.noNews);
 
+  // Uhrzeit: auf der englischen Seite «zeit_en» oder einfache Umschreibung der deutschen Angabe
+  const zeitText = (t) => {
+    if (!t.zeit) return '';
+    if (!EN) return t.zeit;
+    if (t.zeit_en) return t.zeit_en;
+    return t.zeit.replace(/^ca\. /, 'around ').replace(/ Uhr$/, '').replace(/(\d{1,2})\.(\d{2})/g, '$1:$2');
+  };
+
+  // Nächste Termine auf der Startseite: zuerst sechs, auf Wunsch alle
+  const termine = (content.termine || []).filter((t) => t.datum && t.datum >= today).sort((a, b) => a.datum.localeCompare(b.datum));
+  const fmtShort = (iso) => new Date(`${iso}T12:00`).toLocaleDateString(T.locale, { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
+  function renderTermine(all = false) {
+    const list = all ? termine : termine.slice(0, 6);
+    $('#termine').innerHTML = termine.length
+      ? `<ul class="dates">${list
+          .map(
+            (t) => `<li><time datetime="${esc(t.datum)}">${esc(fmtShort(t.datum))}</time>
+              <span><strong>${esc(tx(t, 'titel'))}</strong>${t.zeit || t.ort ? `<span class="meta"> ${esc([zeitText(t), tx(t, 'ort')].filter(Boolean).join(' · '))}</span>` : ''}${tx(t, 'hinweis') ? `<span class="meta"> (${esc(tx(t, 'hinweis'))})</span>` : ''} ${unitTag(t)}</span></li>`
+          )
+          .join('')}</ul>${termine.length > 6 ? `<button type="button" class="btn btn-small btn-ghost" id="toggle-dates">${all ? T.showLess : T.showAll}</button>` : ''}`
+      : emptyNote(T.noDates);
+    const toggle = $('#toggle-dates');
+    if (toggle) toggle.addEventListener('click', () => renderTermine(!all));
+  }
+  renderTermine();
+
   const events = (content.events || []).filter((e) => !e.datum || e.datum >= today).sort((a, b) => String(a.datum).localeCompare(String(b.datum)));
   let needs = content.needs || [];
   const projects = content.projects || [];
@@ -180,7 +214,7 @@
       .join('');
     const pct = total ? Math.round((taken / total) * 100) : 0;
     return `<article class="card need">
-      <p class="meta">${esc(fmt(n.datum))}${n.ort ? ` · ${esc(n.ort)}` : ''} ${unitTag(n)}</p>
+      <p class="meta">${esc([fmt(n.datum), tx(n, 'ort')].filter(Boolean).join(' · '))} ${unitTag(n)}</p>
       <h3>${esc(tx(n, 'titel'))}</h3>
       ${tx(n, 'text') ? `<p>${esc(tx(n, 'text'))}</p>` : ''}
       ${total ? `<p class="meta">${taken} / ${total}</p><div class="bar" role="img" aria-label="${taken} / ${total}"><i data-pct="${pct}"></i></div>` : ''}
@@ -189,14 +223,30 @@
     </article>`;
   }
 
+  // Ideen in Planung, mit Knopf zum Mitmachen
+  const ideen = content.ideen || [];
+  function renderIdeen(unit = '') {
+    const list = ideen.filter((i) => matches(i, unit));
+    $('#ideen').innerHTML = list.length
+      ? list
+          .map(
+            (i) => `<article class="idea-card"><p class="meta">${unitTag(i)}</p><h3>${esc(tx(i, 'titel'))}</h3>${tx(i, 'text') ? `<p>${esc(tx(i, 'text'))}</p>` : ''}
+              <a class="btn btn-small btn-ghost" href="#projekte" data-pick="${esc(i.titel)}" data-pick-unit="${esc(unitOf(i))}">${T.joinIdea}</a></article>`
+          )
+          .join('')
+      : '';
+  }
+
   // Ein Filter gilt für beide Seiten, damit die Auswahl beim Wechseln erhalten bleibt
   $$('[data-unit-filter]').forEach((sel) =>
     sel.addEventListener('change', () => {
       $$('[data-unit-filter]').forEach((s) => (s.value = sel.value));
       renderLists(sel.value);
+      renderIdeen(sel.value);
     })
   );
   renderLists();
+  renderIdeen();
 
   // CSV mit Anführungszeichen, Kommas und Zeilenumbrüchen in Feldern lesen
   function parseCsv(text) {
@@ -269,7 +319,7 @@
   const select = $('#project-select');
   function fillProjectSelect() {
     [...select.options].slice(1).forEach((o) => o.remove());
-    for (const item of [...needs, ...projects]) {
+    for (const item of [...needs, ...projects, ...ideen]) {
       const o = document.createElement('option');
       o.value = item.titel;
       o.textContent = tx(item, 'titel');
