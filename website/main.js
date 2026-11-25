@@ -124,7 +124,7 @@
     : emptyNote(T.noNews);
 
   const events = (content.events || []).filter((e) => !e.datum || e.datum >= today).sort((a, b) => String(a.datum).localeCompare(String(b.datum)));
-  const needs = content.needs || [];
+  let needs = content.needs || [];
   const projects = content.projects || [];
 
   function renderLists(unit = '') {
@@ -164,9 +164,14 @@
         const left = Math.max(need - (Number(s.zugesagt) || 0), 0);
         const label = s.zeit ? `${T.shift} ${s.zeit}` : '';
         const status = !need ? '' : left ? T.free(left) : T.full;
-        const button = !need || left
-          ? `<a class="btn btn-small" href="#projekte" data-pick="${esc(n.titel)}" data-pick-unit="${esc(unitOf(n))}" data-pick-shift="${esc(s.zeit || '')}">${T.signUp}</a>`
+        const formLink = s.auswahl && config.formUrl && config.formEntryAuswahl
+          ? `${config.formUrl}${config.formUrl.includes('?') ? '&' : '?'}usp=pp_url&${encodeURIComponent(config.formEntryAuswahl)}=${encodeURIComponent(s.auswahl)}`
           : '';
+        const button = need && !left
+          ? ''
+          : formLink
+            ? `<a class="btn btn-small" href="${esc(formLink)}" target="_blank" rel="noopener">${T.signUp}</a>`
+            : `<a class="btn btn-small" href="#projekte" data-pick="${esc(n.titel)}" data-pick-unit="${esc(unitOf(n))}" data-pick-shift="${esc(s.zeit || '')}">${T.signUp}</a>`;
         return `<li class="shift${need && !left ? ' full' : ''}">
           <span><strong>${esc(label || (need ? T.needed(need) : ''))}</strong>${label && need ? ` · ${esc(T.needed(need))}` : ''}${status ? ` <span class="meta">${esc(status)}</span>` : ''}</span>
           ${button}
@@ -193,14 +198,85 @@
   );
   renderLists();
 
+  // CSV mit Anführungszeichen, Kommas und Zeilenumbrüchen in Feldern lesen
+  function parseCsv(text) {
+    const rows = [];
+    let row = [];
+    let field = '';
+    let quoted = false;
+    for (let i = 0; i < text.length; i++) {
+      const ch = text[i];
+      if (quoted) {
+        if (ch === '"' && text[i + 1] === '"') { field += '"'; i++; }
+        else if (ch === '"') quoted = false;
+        else field += ch;
+      } else if (ch === '"') quoted = true;
+      else if (ch === ',') { row.push(field); field = ''; }
+      else if (ch === '\n' || ch === '\r') {
+        if (ch === '\r' && text[i + 1] === '\n') i++;
+        row.push(field); rows.push(row); row = []; field = '';
+      } else field += ch;
+    }
+    if (field || row.length) { row.push(field); rows.push(row); }
+    return rows.filter((r) => r.some((v) => v.trim()));
+  }
+
+  // Datum aus der Tabelle: 2027-06-12, 12.06.2027 oder 12.6.27
+  function isoDate(v) {
+    if (!v) return '';
+    if (/^\d{4}-\d{2}-\d{2}$/.test(v)) return v;
+    const m = v.match(/^(\d{1,2})\.(\d{1,2})\.(\d{2}|\d{4})$/);
+    if (!m) return '';
+    const year = m[3].length === 2 ? `20${m[3]}` : m[3];
+    return `${year}-${m[2].padStart(2, '0')}-${m[1].padStart(2, '0')}`;
+  }
+
+  // Eine Zeile pro Schicht; Zeilen mit derselben «id» bilden einen Aufruf
+  function needsFromSheet(text) {
+    const [header, ...rows] = parseCsv(text);
+    const keys = header.map((h) => h.trim().toLowerCase());
+    const byId = new Map();
+    for (const r of rows) {
+      const x = Object.fromEntries(keys.map((k, i) => [k, (r[i] || '').trim()]));
+      x.datum = isoDate(x.datum);
+      if (!x.titel || (x.datum && x.datum < today)) continue;
+      const id = x.id || x.titel;
+      if (!byId.has(id)) {
+        byId.set(id, {
+          titel: x.titel, titel_en: x.titel_en, datum: x.datum, ort: x.ort, schuleinheit: x.schuleinheit || 'Alle',
+          text: x.text, text_en: x.text_en, link: x.link, schichten: [],
+        });
+      }
+      byId.get(id).schichten.push({ zeit: x.schicht, personen: Number(x.personen) || 0, zugesagt: Number(x.angemeldet) || 0, auswahl: x.auswahl });
+    }
+    return [...byId.values()].sort((a, b) => String(a.datum).localeCompare(String(b.datum)));
+  }
+
+  if (config.sheetCsvUrl) {
+    fetch(config.sheetCsvUrl, { cache: 'no-store' })
+      .then((res) => (res.ok ? res.text() : Promise.reject(new Error(res.status))))
+      .then((text) => {
+        needs = needsFromSheet(text);
+        renderLists($('[data-unit-filter]').value);
+        fillProjectSelect();
+      })
+      .catch(() => {
+        // Ohne Verbindung zur Tabelle bleiben die Einträge aus content.js sichtbar
+      });
+  }
+
   // Projektauswahl: Wert bleibt deutsch (für den Elternrat), angezeigt wird die Sprache der Seite
   const select = $('#project-select');
-  for (const item of [...needs, ...projects]) {
-    const o = document.createElement('option');
-    o.value = item.titel;
-    o.textContent = tx(item, 'titel');
-    select.append(o);
+  function fillProjectSelect() {
+    [...select.options].slice(1).forEach((o) => o.remove());
+    for (const item of [...needs, ...projects]) {
+      const o = document.createElement('option');
+      o.value = item.titel;
+      o.textContent = tx(item, 'titel');
+      select.append(o);
+    }
   }
+  fillProjectSelect();
   document.addEventListener('click', (e) => {
     const pick = e.target.closest('[data-pick]');
     if (!pick) return;
@@ -229,6 +305,9 @@
   } else {
     $('#fb-contact').textContent = T.fbSoon;
   }
+
+  const googleNote = $('#privacy-google');
+  if (googleNote && config.formUrl) googleNote.hidden = false;
 
   // Impressum: Verantwortliche je Elternrat
   const resp = config.verantwortliche || {};

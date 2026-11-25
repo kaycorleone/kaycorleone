@@ -28,6 +28,10 @@ Die Website gibt es auf Deutsch (`index.html`) und Englisch (`en.html`). Oben re
 
 Vor dem Veröffentlichen muss in `config.js` die echte E-Mail-Adresse eingetragen werden. Der Platzhalter `elternrat@example.org` ist keine gültige Adresse des Elternrats.
 
+### Anmeldungen mit automatischer Zählung
+
+Aufrufe können in einer Google-Tabelle gepflegt werden; die Website zählt die Anmeldungen dann automatisch. Die Einrichtung ist in `ANLEITUNG-ANMELDUNGEN.md` beschrieben.
+
 ### Formulare
 
 Ohne weitere Einrichtung öffnen die Formulare das E-Mail-Programm der Besucherin oder des Besuchers mit einer vorbereiteten Nachricht an den Elternrat. Wenn die Angaben direkt gesendet werden sollen, kann in `config.js` unter `formEndpoint` die Adresse eines Formulardienstes eingetragen werden, der JSON entgegennimmt (zum Beispiel Formspree).

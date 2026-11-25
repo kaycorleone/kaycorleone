@@ -20,6 +20,14 @@ window.SITE_CONFIG = {
   // gespeichert werden (z. B. ein Feld oder eine Gruppe). Leer lassen, wenn der Dienst keines hat.
   newsletterUnitsField: '',
 
+  // Anmeldungen über Google Tabellen und Google Formulare (siehe ANLEITUNG-ANMELDUNGEN.md).
+  // Adresse des als CSV veröffentlichten Tabellenblatts «Aufrufe». Leer lassen, dann gelten die
+  // Einträge unter «needs» in content.js.
+  sheetCsvUrl: '',
+  // Adresse des Google-Formulars (endet auf /viewform) und Kennung der Frage «Einsatz» (z. B. 'entry.123456789').
+  formUrl: '',
+  formEntryAuswahl: '',
+
   // Verantwortliche für die Inhalte je Elternrat (für das Impressum).
   verantwortliche: {
     'Butzen/Semper': '',
