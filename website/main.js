@@ -19,6 +19,12 @@
         noProjects: 'The projects of the parent councils will be presented here soon.',
         register: 'Register',
         helpBtn: 'I can help',
+        signUp: 'Count me in',
+        needed: (n) => `${n} ${n === 1 ? 'person' : 'people'} needed`,
+        free: (n) => `${n} ${n === 1 ? 'place' : 'places'} left`,
+        full: 'Fully booked, thank you!',
+        shift: 'Shift',
+        more: 'More information',
         fbFollow: 'Follow us on',
         fbSoon: 'A Facebook page of the parent councils is being prepared.',
         tbd: 'to be added',
@@ -40,6 +46,12 @@
         noProjects: 'Die Projekte der Elternräte werden hier bald vorgestellt.',
         register: 'Anmelden',
         helpBtn: 'Ich helfe mit',
+        signUp: 'Ich melde mich',
+        needed: (n) => `${n} ${n === 1 ? 'Person' : 'Personen'} gesucht`,
+        free: (n) => `noch ${n} ${n === 1 ? 'Platz' : 'Plätze'} frei`,
+        full: 'Ausgebucht, vielen Dank!',
+        shift: 'Schicht',
+        more: 'Mehr erfahren',
         fbFollow: 'Folgen Sie uns auf',
         fbSoon: 'Eine Facebook-Seite der Elternräte ist in Vorbereitung.',
         tbd: 'wird ergänzt',
@@ -131,23 +143,45 @@
       : emptyNote(unit ? T.noEventsUnit : T.noEvents);
 
     const nd = needs.filter((n) => matches(n, unit));
-    $('#needs').innerHTML = nd.length
-      ? nd
-          .map(
-            (n) => `<article class="card need">
-              <p class="meta">${esc(fmt(n.datum))} ${unitTag(n)}</p>
-              <h3>${esc(tx(n, 'titel'))}</h3>
-              <p>${esc(tx(n, 'text'))}</p>
-              <a class="btn btn-small" href="#projekte" data-pick="${esc(n.titel)}" data-pick-unit="${esc(unitOf(n))}">${T.helpBtn}</a>
-            </article>`
-          )
-          .join('')
-      : emptyNote(T.noNeeds);
+    $('#needs').innerHTML = nd.length ? nd.map(needCard).join('') : emptyNote(T.noNeeds);
 
     const pr = projects.filter((p) => matches(p, unit));
     $('#projects').innerHTML = pr.length
-      ? pr.map((p) => `<article class="card"><p class="meta">${tx(p, 'status') ? `${esc(tx(p, 'status'))} ` : ''}${unitTag(p)}</p><h3>${esc(tx(p, 'titel'))}</h3><p>${esc(tx(p, 'text'))}</p></article>`).join('')
+      ? pr.map((p) => `<article class="card"><p class="meta">${tx(p, 'status') ? `${esc(tx(p, 'status'))} ` : ''}${unitTag(p)}</p><h3>${esc(tx(p, 'titel'))}</h3><p>${esc(tx(p, 'text'))}</p>${p.link ? `<p><a href="${esc(p.link)}" target="_blank" rel="noopener">${T.more}</a></p>` : ''}</article>`).join('')
       : emptyNote(T.noProjects);
+    $$('.bar i[data-pct]').forEach((i) => (i.style.width = `${i.dataset.pct}%`));
+  }
+
+  // Ein Aufruf hat entweder Schichten (je mit eigener Anzahl Personen) oder eine Gesamtzahl.
+  // «zugesagt» trägt der Elternrat von Hand nach, sobald sich jemand gemeldet hat.
+  function needCard(n) {
+    const shifts = Array.isArray(n.schichten) && n.schichten.length ? n.schichten : [{ zeit: n.zeit, personen: n.personen, zugesagt: n.zugesagt }];
+    const total = shifts.reduce((s, x) => s + (Number(x.personen) || 0), 0);
+    const taken = shifts.reduce((s, x) => s + Math.min(Number(x.zugesagt) || 0, Number(x.personen) || 0), 0);
+    const rows = shifts
+      .map((s) => {
+        const need = Number(s.personen) || 0;
+        const left = Math.max(need - (Number(s.zugesagt) || 0), 0);
+        const label = s.zeit ? `${T.shift} ${s.zeit}` : '';
+        const status = !need ? '' : left ? T.free(left) : T.full;
+        const button = !need || left
+          ? `<a class="btn btn-small" href="#projekte" data-pick="${esc(n.titel)}" data-pick-unit="${esc(unitOf(n))}" data-pick-shift="${esc(s.zeit || '')}">${T.signUp}</a>`
+          : '';
+        return `<li class="shift${need && !left ? ' full' : ''}">
+          <span><strong>${esc(label || (need ? T.needed(need) : ''))}</strong>${label && need ? ` · ${esc(T.needed(need))}` : ''}${status ? ` <span class="meta">${esc(status)}</span>` : ''}</span>
+          ${button}
+        </li>`;
+      })
+      .join('');
+    const pct = total ? Math.round((taken / total) * 100) : 0;
+    return `<article class="card need">
+      <p class="meta">${esc(fmt(n.datum))}${n.ort ? ` · ${esc(n.ort)}` : ''} ${unitTag(n)}</p>
+      <h3>${esc(tx(n, 'titel'))}</h3>
+      ${tx(n, 'text') ? `<p>${esc(tx(n, 'text'))}</p>` : ''}
+      ${total ? `<p class="meta">${taken} / ${total}</p><div class="bar" role="img" aria-label="${taken} / ${total}"><i data-pct="${pct}"></i></div>` : ''}
+      <ul class="shifts">${rows}</ul>
+      ${n.link ? `<p><a href="${esc(n.link)}" target="_blank" rel="noopener">${T.more}</a></p>` : ''}
+    </article>`;
   }
 
   // Ein Filter gilt für beide Seiten, damit die Auswahl beim Wechseln erhalten bleibt
@@ -174,6 +208,8 @@
     select.value = pick.dataset.pick;
     const unitSelect = $('select[name=schuleinheit]', select.closest('form'));
     if (pick.dataset.pickUnit) unitSelect.value = pick.dataset.pickUnit;
+    const message = $('textarea[name=nachricht]', select.closest('form'));
+    if (pick.dataset.pickShift) message.value = `${T.shift}: ${pick.dataset.pickShift}\n${message.value.replace(/^(Schicht|Shift): .*\n?/, '')}`;
     select.closest('form').scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 

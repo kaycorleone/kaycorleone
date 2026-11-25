@@ -139,6 +139,13 @@ th { font-size: .82rem; color: var(--muted); }
 .nl-units { grid-column: 1 / -1; border-color: rgba(255, 255, 255, .35); display: flex; flex-wrap: wrap; gap: 4px 16px; padding: 6px 12px 8px; }
 .nl-units legend { font-size: .85rem; font-weight: 600; }
 
+/* Aufrufe mit Schichten */
+.bar { height: 8px; border-radius: 4px; background: var(--soft); overflow: hidden; margin: 2px 0 10px; }
+.bar i { display: block; height: 100%; width: 0; background: var(--green); border-radius: 4px; }
+.shifts { list-style: none; padding: 0; margin: 0; }
+.shift { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 16px; padding: 10px 0; border-top: 1px solid var(--line); }
+.shift.full { opacity: .7; }
+
 /* Formulare */
 .form { display: grid; gap: 14px; max-width: 760px; }
 .row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
