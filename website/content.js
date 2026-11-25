@@ -1,6 +1,8 @@
 // Inhalte, die die Elternräte selbst pflegen. Neue Einträge nach dem Muster in den
 // Kommentaren einfügen. Leere Listen zeigen auf der Website einen kurzen Hinweis.
 // Feld «schuleinheit»: 'Butzen/Semper', 'Chilefeld/Stigeli', 'Zwillikon' oder 'Alle'.
+// Englische Seite: optional «titel_en», «text_en» und «status_en» ergänzen. Fehlen sie,
+// zeigt die englische Seite den deutschen Text.
 window.SITE_CONTENT = {
   // Mitteilungen auf der Startseite
   // { datum: '2027-01-15', schuleinheit: 'Alle', titel: 'Titel', text: 'Kurzer Text' }

@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Parent Councils, Primarschule Affoltern am Albis</title>
+  <meta name="description" content="Parent councils of the Primarschule Affoltern am Albis: parent education, projects, helping out, information for new families and newsletter.">
+  <link rel="alternate" hreflang="de" href="index.html">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#inhalt">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#start" data-tab="start">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>
+          <span class="brand-title">Parent Councils</span>
+          <span class="brand-sub">Primarschule Affoltern am Albis</span>
+        </span>
+      </a>
+      <div class="header-tools">
+        <nav class="lang-switch" aria-label="Language">
+          <a href="index.html" hreflang="de" lang="de" data-lang-link title="Deutsch">DE</a>
+          <span aria-current="true">EN</span>
+        </nav>
+        <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+      </div>
+    </div>
+    <nav class="wrap nav" id="nav" aria-label="Main navigation">
+      <a href="#start" data-tab="start">Home</a>
+      <a href="#elternbildung" data-tab="elternbildung">Parent education</a>
+      <a href="#projekte" data-tab="projekte">Projects</a>
+      <a href="#mithelfen" data-tab="mithelfen">Help out</a>
+      <a href="#neu" data-tab="neu">New at school</a>
+      <a href="#so-gehts" data-tab="so-gehts">How it works</a>
+      <a href="#kontakt" data-tab="kontakt">Contact and links</a>
+    </nav>
+  </header>
+
+  <main id="inhalt" class="wrap" tabindex="-1">
+
+    <!-- Home -->
+    <section class="tab" id="tab-start" data-section="start">
+      <div class="hero">
+        <h1>Working together for a good school</h1>
+        <p class="lead">We are parents who work in the parent councils of the three school units for a good partnership between families and the school. Here you will find our activities, projects and all the ways you can get involved.</p>
+        <p class="actions">
+          <a class="btn" href="#mithelfen" data-tab="mithelfen">I would like to help</a>
+          <a class="btn btn-ghost" href="#neu" data-tab="neu">We are new here</a>
+        </p>
+      </div>
+
+      <div class="tiles">
+        <a class="tile t1" href="#elternbildung" data-tab="elternbildung">
+          <strong>Parent education</strong>
+          <span>Talks and courses for parents. Tell us which topics interest you.</span>
+        </a>
+        <a class="tile t2" href="#projekte" data-tab="projekte">
+          <strong>Projects</strong>
+          <span>What we do together with the school and where we need support.</span>
+        </a>
+        <a class="tile t3" href="#mithelfen" data-tab="mithelfen">
+          <strong>Help out</strong>
+          <span>One hour a year already helps. Tell us how you would like to take part.</span>
+        </a>
+        <a class="tile t4" href="#neu" data-tab="neu">
+          <strong>New at school?</strong>
+          <span>Explanations, contacts and the first steps for new families.</span>
+        </a>
+      </div>
+
+      <h2>The three parent councils</h2>
+      <div class="units">
+        <a class="unit-card" href="https://www.psa.ch/sebutzenfs" target="_blank" rel="noopener"><strong>Butzen/Semper</strong><span>Parent council of the Butzen/Semper school unit</span><small>Page on psa.ch (in German)</small></a>
+        <a class="unit-card" href="https://www.psa.ch/sechilefeldfs" target="_blank" rel="noopener"><strong>Chilefeld/Stigeli</strong><span>Parent council of the Chilefeld/Stigeli school unit</span><small>Page on psa.ch (in German)</small></a>
+        <a class="unit-card" href="https://psa.ch/de/schule/elternbildung/sezwillikonfs" target="_blank" rel="noopener"><strong>Zwillikon</strong><span>Parent council of the Zwillikon school unit</span><small>Page on psa.ch (in German)</small></a>
+      </div>
+      <p class="meta">Shared contact address: <a data-email href="#"></a>. Please mention your school unit in your message. You are welcome to write in English.</p>
+
+      <div class="grid-2">
+        <section class="panel">
+          <h2>Who we are</h2>
+          <p>The Primarschule Affoltern am Albis (primary school) has three school units, each with its own parent council, called <em>Elternrat</em>. Each Elternrat is made up of delegates from the classes. They are elected between the summer and the autumn holidays, usually at the parents' evening.</p>
+          <p>On this shared website the three parent councils present what they do. We encourage exchange between parents and the school, organise events and parent education, support projects and welcome new families.</p>
+          <p class="note-line">Questions about staff, teaching, the curriculum, teaching materials, the timetable and the allocation of children to classes are not part of parent participation under § 55 of the Zurich Elementary School Act (Volksschulgesetz). For these, please contact the class teacher or the school management.</p>
+        </section>
+        <section class="panel">
+          <h2>News</h2>
+          <div id="news"></div>
+        </section>
+      </div>
+    </section>
+
+    <!-- Parent education -->
+    <section class="tab" id="tab-elternbildung" data-section="elternbildung" hidden>
+      <h1>Parent education</h1>
+      <p class="lead">As children grow, so do the questions. We organise talks and discussion evenings on topics that matter to parents, and we collect good offers from the region.</p>
+
+      <label class="unit-filter">School unit
+        <select data-unit-filter>
+          <option value="">Show all</option>
+          <option>Butzen/Semper</option>
+          <option>Chilefeld/Stigeli</option>
+          <option>Zwillikon</option>
+        </select>
+      </label>
+      <h2>Our next events</h2>
+      <div id="events"></div>
+
+      <section class="panel">
+        <h2>Tell us your topics</h2>
+        <p>Which topics interest you? The more parents reply, the better we can plan.</p>
+        <form class="form" data-form="themen">
+          <fieldset>
+            <legend>Topics I am interested in</legend>
+            <div class="check-grid">
+              <label class="check"><input type="checkbox" name="themen" value="Kinder und Medien, Handy, Bildschirmzeit"> <span>Children and media, phones, screen time</span></label>
+              <label class="check"><input type="checkbox" name="themen" value="Lernen zu Hause und Hausaufgaben"> <span>Learning at home and homework</span></label>
+              <label class="check"><input type="checkbox" name="themen" value="Mobbing und Konflikte unter Kindern"> <span>Bullying and conflicts between children</span></label>
+              <label class="check"><input type="checkbox" name="themen" value="Übertritt in die Sekundarschule"> <span>Moving on to secondary school</span></label>
+              <label class="check"><input type="checkbox" name="themen" value="Mehrsprachigkeit in der Familie"> <span>Raising children with several languages</span></label>
+              <label class="check"><input type="checkbox" name="themen" value="Ernährung und Bewegung"> <span>Nutrition and exercise</span></label>
+              <label class="check"><input type="checkbox" name="themen" value="Taschengeld und Umgang mit Geld"> <span>Pocket money and handling money</span></label>
+              <label class="check"><input type="checkbox" name="themen" value="Erste Hilfe bei Kindern"> <span>First aid for children</span></label>
+              <label class="check"><input type="checkbox" name="themen" value="Grenzen setzen und Erziehung im Alltag"> <span>Setting limits and everyday parenting</span></label>
+            </div>
+          </fieldset>
+          <label>Your own suggestion <span class="hint">optional</span><textarea name="vorschlag" rows="3" maxlength="1500"></textarea></label>
+          <div class="row">
+            <label>Which time suits you best?
+              <select name="zeit">
+                <option value="">no preference</option>
+                <option value="Unter der Woche, abends">Weekday evenings</option>
+                <option value="Samstagvormittag">Saturday mornings</option>
+                <option value="Online">Online</option>
+              </select>
+            </label>
+            <label>Email <span class="hint">optional, if we may invite you</span><input name="email" type="email" maxlength="200" autocomplete="email"></label>
+          </div>
+          <div class="row">
+            <label>School unit
+              <select name="schuleinheit">
+                <option value="Alle Schuleinheiten">All school units</option>
+                <option>Butzen/Semper</option>
+                <option>Chilefeld/Stigeli</option>
+                <option>Zwillikon</option>
+              </select>
+            </label>
+          </div>
+          <button type="submit" class="btn">Send topics</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <h2>Offers for parents in the region and in Switzerland</h2>
+      <p class="meta">A selection of public and non-profit offers. Most pages are in German; some offer other languages. Course dates and prices are on the providers' websites.</p>
+      <div class="link-grid">
+        <a class="link-card" href="https://www.elternbildung.ch/agenda" target="_blank" rel="noopener">
+          <strong>Elternbildung CH</strong>
+          <span>Swiss umbrella organisation for parent education, with a calendar of courses and talks, some of them online.</span>
+          <small>elternbildung.ch</small>
+        </a>
+        <a class="link-card" href="https://www.zh.ch/de/familie/angebote-fuer-familien-mit-kindern/elternbildung/kurse-und-veranstaltungen.html" target="_blank" rel="noopener">
+          <strong>Parent education, Canton of Zurich</strong>
+          <span>Courses and events for parents in the Canton of Zurich, compiled by the cantonal parent education office.</span>
+          <small>zh.ch</small>
+        </a>
+        <a class="link-card" href="https://www.zh.ch/de/familie/angebote-fuer-familien-mit-kindern/elternbildung/kantonale-elternbildungsangebote.html" target="_blank" rel="noopener">
+          <strong>Offers for parents who speak other languages</strong>
+          <span>Cantonal programmes such as «Startklar» and «Deutsch für Eltern» (German for parents), as well as Femmes-Tische and Männer-Tische.</span>
+          <small>zh.ch</small>
+        </a>
+        <a class="link-card" href="https://www.femmestische.ch" target="_blank" rel="noopener">
+          <strong>Femmes-Tische and Männer-Tische</strong>
+          <span>Moderated discussion groups for women and for men in small groups, often in the participants' own language. Information in many languages.</span>
+          <small>femmestische.ch</small>
+        </a>
+        <a class="link-card" href="https://www.kinderschutz.ch" target="_blank" rel="noopener">
+          <strong>Parenting course «Starke Eltern – Starke Kinder»</strong>
+          <span>Course by Kinderschutz Schweiz (Child Protection Switzerland) on everyday parenting and resolving conflicts without violence, in person and online.</span>
+          <small>kinderschutz.ch</small>
+        </a>
+        <a class="link-card" href="https://www.jugendundmedien.ch" target="_blank" rel="noopener">
+          <strong>Jugend und Medien (Youth and Media)</strong>
+          <span>Federal platform on media literacy with tips for parents by age group.</span>
+          <small>jugendundmedien.ch</small>
+        </a>
+        <a class="link-card" href="https://www.projuventute.ch/de/elternberatung" target="_blank" rel="noopener">
+          <strong>Pro Juventute parent counselling</strong>
+          <span>Advice for parents around the clock and parent letters for the first years of life.</span>
+          <small>projuventute.ch</small>
+        </a>
+        <a class="link-card" href="https://keo-zh.ch" target="_blank" rel="noopener">
+          <strong>KEO, Canton of Zurich</strong>
+          <span>Cantonal organisation for parent participation, with training and exchange for parent councils.</span>
+          <small>keo-zh.ch</small>
+        </a>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="tab" id="tab-projekte" data-section="projekte" hidden>
+      <h1>Projects</h1>
+      <p class="lead">Together with the school we carry out projects that benefit children and families. For some of them we are still looking for support.</p>
+
+      <label class="unit-filter">School unit
+        <select data-unit-filter>
+          <option value="">Show all</option>
+          <option>Butzen/Semper</option>
+          <option>Chilefeld/Stigeli</option>
+          <option>Zwillikon</option>
+        </select>
+      </label>
+      <h2>We are looking for support</h2>
+      <div id="needs"></div>
+
+      <h2>Current projects</h2>
+      <div id="projects"></div>
+
+      <section class="panel">
+        <h2>Get in touch if you would like to help</h2>
+        <form class="form" data-form="projekt">
+          <div class="row">
+            <label>Name <input name="name" required maxlength="120" autocomplete="name"></label>
+            <label>Email <input name="email" type="email" required maxlength="200" autocomplete="email"></label>
+          </div>
+          <div class="row">
+            <label>Which project?
+              <select name="projekt" id="project-select"><option value="Allgemein">I am open to anything</option></select>
+            </label>
+            <label>School unit
+              <select name="schuleinheit">
+                <option value="Alle Schuleinheiten">All school units</option>
+                <option>Butzen/Semper</option>
+                <option>Chilefeld/Stigeli</option>
+                <option>Zwillikon</option>
+              </select>
+            </label>
+          </div>
+          <label>Message <span class="hint">optional, for example your child's class or when you have time</span><textarea name="nachricht" rows="3" maxlength="1500"></textarea></label>
+          <label class="check"><input type="checkbox" name="einwilligung" required> <span>I agree that the parent council may use my details to organise this project.</span></label>
+          <button type="submit" class="btn">I can help</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="panel">
+        <h2>Do you have an idea for a project?</h2>
+        <p>Tell us what you would like for the school and how it could be done. The parent council of your school unit will discuss the idea at its next meeting and get back to you. Ideas for all three school units are discussed by the parent councils together.</p>
+        <form class="form" data-form="idee">
+          <label>Your idea <textarea name="idee" required rows="4" maxlength="2000"></textarea></label>
+          <div class="row">
+            <label>School unit
+              <select name="schuleinheit">
+                <option value="Alle Schuleinheiten">All school units</option>
+                <option>Butzen/Semper</option>
+                <option>Chilefeld/Stigeli</option>
+                <option>Zwillikon</option>
+              </select>
+            </label>
+          </div>
+          <div class="row">
+            <label>Name <span class="hint">optional</span><input name="name" maxlength="120" autocomplete="name"></label>
+            <label>Email <span class="hint">so we can reply</span><input name="email" type="email" maxlength="200" autocomplete="email"></label>
+          </div>
+          <button type="submit" class="btn">Send idea</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </section>
+
+    <!-- Help out -->
+    <section class="tab" id="tab-mithelfen" data-section="mithelfen" hidden>
+      <h1>Would you like to help the school?</h1>
+      <p class="lead">Not everyone has time to sit on the parent council. But many people can help for an hour now and then, bake a cake or translate something. Tell us what we may ask you for. You decide each time whether it suits you.</p>
+
+      <div class="help-grid">
+        <div class="help-card"><strong>Events</strong><span>Setting up, running a stand or tidying up at sports day, Räbeliechtli (lantern parade), flea markets and celebrations.</span></div>
+        <div class="help-card"><strong>Baking and food</strong><span>A cake for the cake stall or help with a Znüni (morning snack) campaign.</span></div>
+        <div class="help-card"><strong>Translating</strong><span>Briefly translating for a family who does not speak much German yet.</span></div>
+        <div class="help-card"><strong>Accompanying</strong><span>Going along on class outings or helping to make the way to school safer.</span></div>
+        <div class="help-card"><strong>Showing your job or hobby</strong><span>Presenting your profession or a hobby to the children during a project week.</span></div>
+        <div class="help-card"><strong>Joining the parent council</strong><span>Representing the parents of your child's class as a delegate.</span></div>
+      </div>
+
+      <section class="panel">
+        <h2>I am happy to help</h2>
+        <form class="form" data-form="helfen">
+          <div class="row">
+            <label>Name <input name="name" required maxlength="120" autocomplete="name"></label>
+            <label>Email <input name="email" type="email" required maxlength="200" autocomplete="email"></label>
+          </div>
+          <div class="row">
+            <label>Phone <span class="hint">optional</span><input name="telefon" type="tel" maxlength="40" autocomplete="tel"></label>
+            <label>School unit
+              <select name="schuleinheit">
+                <option value="Weiss ich noch nicht">I don't know yet</option>
+                <option>Butzen/Semper</option>
+                <option>Chilefeld/Stigeli</option>
+                <option>Zwillikon</option>
+              </select>
+            </label>
+          </div>
+          <fieldset>
+            <legend>What may we ask you for?</legend>
+            <div class="check-grid">
+              <label class="check"><input type="checkbox" name="bereiche" value="Anlässe"> <span>Events</span></label>
+              <label class="check"><input type="checkbox" name="bereiche" value="Backen und Verpflegung"> <span>Baking and food</span></label>
+              <label class="check"><input type="checkbox" name="bereiche" value="Übersetzen"> <span>Translating</span></label>
+              <label class="check"><input type="checkbox" name="bereiche" value="Begleitung"> <span>Accompanying</span></label>
+              <label class="check"><input type="checkbox" name="bereiche" value="Beruf oder Hobby zeigen"> <span>Showing a job or hobby</span></label>
+              <label class="check"><input type="checkbox" name="bereiche" value="Handwerk und Basteln"> <span>Crafts and DIY</span></label>
+              <label class="check"><input type="checkbox" name="bereiche" value="IT und Technik"> <span>IT and technology</span></label>
+              <label class="check"><input type="checkbox" name="bereiche" value="Interesse am Elternrat"> <span>Interest in the parent council</span></label>
+            </div>
+          </fieldset>
+          <div class="row">
+            <label>How often?
+              <select name="haeufigkeit">
+                <option value="Einmal pro Jahr">Once a year</option>
+                <option value="Ab und zu eine Stunde">An hour now and then</option>
+                <option value="Regelmässig">Regularly</option>
+              </select>
+            </label>
+            <label>Languages you speak <span class="hint">optional</span><input name="sprachen" maxlength="120"></label>
+          </div>
+          <label class="check"><input type="checkbox" name="einwilligung" required> <span>I agree that the parent council may contact me about suitable tasks. I can withdraw at any time.</span></label>
+          <button type="submit" class="btn">Sign up</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </section>
+
+    <!-- New at school -->
+    <section class="tab" id="tab-neu" data-section="neu" hidden>
+      <h1>New at school?</h1>
+      <p class="lead">Welcome to Affoltern am Albis! Starting at a new school raises many questions. Here you will find the most important answers and people who are glad to help.</p>
+
+      <div class="panel info">
+        <p><strong>Another language?</strong> You can read this website in your own language. In Chrome and Edge, right-click on the page and choose «Translate». In Safari on the iPhone, tap «Aa» in the address bar and then «Translate Website».</p>
+      </div>
+
+      <h2>The first steps</h2>
+      <ol class="steps-list">
+        <li><strong>Get to know the class teacher.</strong> The class teacher (<em>Klassenlehrperson</em>) is your first contact for all questions about your child.</li>
+        <li><strong>Go to the parents' evening.</strong> There you will learn how the school year works and meet other parents.</li>
+        <li><strong>Subscribe to the newsletter.</strong> That way you will not miss any parent council events.</li>
+        <li><strong>Find a buddy family.</strong> A family who has lived here longer answers your questions and comes along to your first event.</li>
+      </ol>
+
+      <h2>Small glossary</h2>
+      <p class="meta">You will see these German words in letters from the school.</p>
+      <dl class="glossary">
+        <div><dt>Klassenlehrperson (class teacher)</dt><dd>The teacher responsible for the class. The first contact for parents.</dd></div>
+        <div><dt>Schulleitung (school management)</dt><dd>Leads a school unit. The next contact if a question cannot be settled with the class teacher.</dd></div>
+        <div><dt>Elternabend (parents' evening)</dt><dd>An information evening held by the class teacher for the parents of a class, usually at the beginning of the school year.</dd></div>
+        <div><dt>Elternrat (parent council)</dt><dd>Parents who organise events and projects together with the school and bring in the concerns of parents.</dd></div>
+        <div><dt>Znüni (morning snack)</dt><dd>A small snack for the morning break, for example fruit, vegetables or bread.</dd></div>
+        <div><dt>Schulergänzende Betreuung (childcare)</dt><dd>Care before and after lessons and at lunchtime. The school administration can give you details.</dd></div>
+      </dl>
+      <p>More terms and rules are explained by the school in the <a href="https://www.psa.ch/elternabc" target="_blank" rel="noopener">ABC of the Primarschule Affoltern am Albis</a> (in German).</p>
+
+      <section class="panel">
+        <h2>Parent buddy</h2>
+        <p>Would you like to be accompanied by a family who has lived here longer? Or would you like to accompany a new family yourself? Get in touch with us.</p>
+        <form class="form" data-form="buddy">
+          <fieldset>
+            <legend>I would like …</legend>
+            <label class="check"><input type="radio" name="art" value="Wir sind neu und möchten begleitet werden" checked> <span>… to be accompanied. We are new here.</span></label>
+            <label class="check"><input type="radio" name="art" value="Wir begleiten gerne eine neue Familie"> <span>… to accompany a new family.</span></label>
+          </fieldset>
+          <div class="row">
+            <label>Name <input name="name" required maxlength="120" autocomplete="name"></label>
+            <label>Email <input name="email" type="email" required maxlength="200" autocomplete="email"></label>
+          </div>
+          <div class="row">
+            <label>Languages <span class="hint">for example English, Portuguese</span><input name="sprachen" maxlength="120"></label>
+            <label>School unit
+              <select name="schuleinheit">
+                <option value="Weiss ich noch nicht">I don't know yet</option>
+                <option>Butzen/Semper</option>
+                <option>Chilefeld/Stigeli</option>
+                <option>Zwillikon</option>
+              </select>
+            </label>
+          </div>
+          <label class="check"><input type="checkbox" name="einwilligung" required> <span>I agree that the parent council may pass on my name and email address to the family we are matched with.</span></label>
+          <button type="submit" class="btn">Sign up</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <h2>Help and advice</h2>
+      <ul class="plain">
+        <li><strong>kjz Affoltern</strong> (child and youth support centre): free and confidential advice on parenting and family matters, and for mothers and fathers of young children. Im Winkel 2, 8910 Affoltern am Albis, phone 043 259 93 33. <a href="https://www.zh.ch/de/bildungsdirektion/amt-fuer-jugend-und-berufsberatung/kjz-affoltern.html" target="_blank" rel="noopener">Website</a></li>
+        <li><strong>Elternnotruf</strong> (parents' helpline): advice around the clock, phone 0848 35 45 55. <a href="https://www.elternnotruf.ch" target="_blank" rel="noopener">elternnotruf.ch</a></li>
+        <li><strong>Pro Juventute parent counselling</strong>: phone 058 261 61 61, around the clock. <a href="https://www.projuventute.ch/de/elternberatung" target="_blank" rel="noopener">projuventute.ch</a></li>
+      </ul>
+    </section>
+
+    <!-- How it works -->
+    <section class="tab" id="tab-so-gehts" data-section="so-gehts" hidden>
+      <h1>How it works</h1>
+      <p class="lead">A short guide to this website and to the ways you can get involved.</p>
+
+      <ol class="tutorial">
+        <li>
+          <h2>Stay informed</h2>
+          <p>Subscribe to our newsletter at the bottom of every page. A few times per school year you will receive an email with events, projects and calls for help. You can unsubscribe at any time with one click.</p>
+          <a class="btn btn-small btn-ghost" href="#newsletter">Go to the newsletter</a>
+        </li>
+        <li>
+          <h2>Parent education</h2>
+          <p>Under «Parent education» you will find our next talks and offers from the region. Use the form to tell us which topics interest you. We plan the next events based on your answers.</p>
+          <a class="btn btn-small btn-ghost" href="#elternbildung" data-tab="elternbildung">Go to parent education</a>
+        </li>
+        <li>
+          <h2>Help with a project</h2>
+          <p>Under «Projects» you can see where we need support right now, for example: «Sports day, 6 people from 8 am to 12 noon». Choose the project in the form and send it. We will get back to you with all the details.</p>
+          <a class="btn btn-small btn-ghost" href="#projekte" data-tab="projekte">Go to projects</a>
+        </li>
+        <li>
+          <h2>Sign up as a helper</h2>
+          <p>Under «Help out» you tell us what we may ask you for and how often. We will only write to you when something suits you. Saying no is always fine.</p>
+          <a class="btn btn-small btn-ghost" href="#mithelfen" data-tab="mithelfen">Go to help out</a>
+        </li>
+        <li>
+          <h2>Share an idea or a concern</h2>
+          <p>Send ideas for the school under «Projects». The parent council of your school unit discusses every idea at its meeting and gets back to you. Please discuss questions about your child, about teachers or about lessons with the class teacher or the school management.</p>
+        </li>
+        <li>
+          <h2>Join the parent council</h2>
+          <p>Each school unit has its own parent council. Delegates are elected between the summer and the autumn holidays, usually at your class's parents' evening. If you could imagine taking part, tick «Interest in the parent council» under «Help out». We will contact you before the parents' evening.</p>
+        </li>
+        <li>
+          <h2>What happens to my details?</h2>
+          <p>The forms send your details by email to the shared address of the parent councils. We pass them on to the parent council of your school unit, use them only for the purpose stated and delete them at any time on request. More in the <a href="#impressum" data-tab="impressum">legal notice and privacy</a> section.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- Contact and links -->
+    <section class="tab" id="tab-kontakt" data-section="kontakt" hidden>
+      <h1>Contact and links</h1>
+
+      <div class="grid-2">
+        <section class="panel">
+          <h2>Parent councils</h2>
+          <p>Shared address of the three parent councils: <a data-email href="#"></a>. Please mention your school unit so that we can forward your message. You are welcome to write in English.</p>
+          <p id="fb-contact"></p>
+          <p>The three parent councils on the school's website (in German):</p>
+          <ul class="plain">
+            <li><a href="https://www.psa.ch/sebutzenfs" target="_blank" rel="noopener">Parent council Butzen/Semper</a></li>
+            <li><a href="https://www.psa.ch/sechilefeldfs" target="_blank" rel="noopener">Parent council Chilefeld/Stigeli</a></li>
+            <li><a href="https://psa.ch/de/schule/elternbildung/sezwillikonfs" target="_blank" rel="noopener">Parent council Zwillikon</a></li>
+          </ul>
+        </section>
+
+        <section class="panel">
+          <h2>Primarschule Affoltern am Albis</h2>
+          <address>
+            Schulverwaltung (school administration)<br>
+            Obere Seewadelstrasse 14<br>
+            8910 Affoltern am Albis<br>
+            Phone <a href="tel:+41433226010">043 322 60 10</a><br>
+            <a href="mailto:primarschule@stadtaffoltern.ch">primarschule@stadtaffoltern.ch</a>
+          </address>
+          <p class="meta">Opening hours according to the school's website: Monday to Friday 8.00 to 11.30, and Monday and Thursday also 13.30 to 17.00.</p>
+          <p><a href="https://www.psa.ch" target="_blank" rel="noopener">psa.ch</a> · <a href="https://www.psa.ch/elternabc" target="_blank" rel="noopener">School ABC</a></p>
+        </section>
+      </div>
+
+      <h2>Important addresses</h2>
+      <div class="link-grid">
+        <a class="link-card" href="https://www.zh.ch/de/bildungsdirektion/amt-fuer-jugend-und-berufsberatung/kjz-affoltern.html" target="_blank" rel="noopener">
+          <strong>kjz Affoltern</strong>
+          <span>Advice on parenting and family matters, and for mothers and fathers of young children. Im Winkel 2, 8910 Affoltern am Albis, 043 259 93 33.</span>
+          <small>zh.ch</small>
+        </a>
+        <a class="link-card" href="https://www.stadtaffoltern.ch/lebenssituationen/62587" target="_blank" rel="noopener">
+          <strong>Town of Affoltern am Albis: family and children</strong>
+          <span>Services and contacts for families in Affoltern.</span>
+          <small>stadtaffoltern.ch</small>
+        </a>
+        <a class="link-card" href="https://www.elternnotruf.ch" target="_blank" rel="noopener">
+          <strong>Elternnotruf (parents' helpline)</strong>
+          <span>Advice for parents around the clock, 0848 35 45 55.</span>
+          <small>elternnotruf.ch</small>
+        </a>
+        <a class="link-card" href="https://www.projuventute.ch/de/elternberatung" target="_blank" rel="noopener">
+          <strong>Pro Juventute parent counselling</strong>
+          <span>Advice around the clock, 058 261 61 61.</span>
+          <small>projuventute.ch</small>
+        </a>
+        <a class="link-card" href="https://www.elternbildung.ch" target="_blank" rel="noopener">
+          <strong>Elternbildung CH</strong>
+          <span>Courses, talks and information for parents throughout Switzerland.</span>
+          <small>elternbildung.ch</small>
+        </a>
+        <a class="link-card" href="https://www.zh.ch/de/familie/angebote-fuer-familien-mit-kindern/elternbildung.html" target="_blank" rel="noopener">
+          <strong>Parent education, Canton of Zurich</strong>
+          <span>Cantonal offers and an overview of courses for parents.</span>
+          <small>zh.ch</small>
+        </a>
+        <a class="link-card" href="https://keo-zh.ch" target="_blank" rel="noopener">
+          <strong>KEO, Canton of Zurich</strong>
+          <span>Umbrella organisation for parent participation in the Canton of Zurich.</span>
+          <small>keo-zh.ch</small>
+        </a>
+        <a class="link-card" href="https://www.jugendundmedien.ch" target="_blank" rel="noopener">
+          <strong>Jugend und Medien (Youth and Media)</strong>
+          <span>Media literacy: tips for parents.</span>
+          <small>jugendundmedien.ch</small>
+        </a>
+      </div>
+      <p class="meta">Emergencies: police 117, ambulance 144, advice for children and young people 147.</p>
+    </section>
+
+    <!-- Legal notice and privacy -->
+    <section class="tab" id="tab-impressum" data-section="impressum" hidden>
+      <h1>Legal notice and privacy</h1>
+      <section class="panel">
+        <h2>Responsible for this website</h2>
+        <p>The parent councils of the Primarschule Affoltern am Albis: Butzen/Semper, Chilefeld/Stigeli and Zwillikon. The parent councils are the bodies for parent participation in the school units. This website is not a service of the school administration.</p>
+        <p>Contact: <a data-email href="#"></a></p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Parent council</th><th>Responsible for the content</th></tr></thead>
+            <tbody id="responsible"></tbody>
+          </table>
+        </div>
+      </section>
+      <section class="panel">
+        <h2>Privacy</h2>
+        <p>This website does not set cookies, does not use analytics or advertising services and does not embed content from Facebook or other social networks. Links to other websites open their pages; their privacy policies apply there.</p>
+        <p>When you use a form, your details are sent by email to the shared address of the parent councils. We use them only for the purpose you state in the form, pass them on to the parent council of your school unit and do not share them with third parties. We delete details about tasks and events at the latest at the end of the school year, unless you explicitly wish to stay on our list of helpers.</p>
+        <p>For the newsletter we store your email address and the school units you have chosen. You can unsubscribe at any time.</p>
+        <p>You can ask at any time what details we hold about you and request that they be corrected or deleted. Please write to <a data-email href="#"></a>.</p>
+        <p class="meta">The German version of this page is authoritative.</p>
+      </section>
+    </section>
+
+    <!-- Newsletter, visible on every page -->
+    <section class="newsletter" id="newsletter">
+      <div>
+        <h2>Newsletter</h2>
+        <p>A few times per school year: events, projects and calls for help from the parent councils, straight to your inbox. Choose the school units you would like to hear from. The newsletter is usually written in German.</p>
+      </div>
+      <form class="newsletter-form" id="newsletter-form">
+        <label class="visually-hidden" for="nl-email">Email address</label>
+        <input id="nl-email" name="email" type="email" required placeholder="Your email address" autocomplete="email">
+        <button type="submit" class="btn">Subscribe</button>
+        <fieldset class="nl-units">
+          <legend>News from</legend>
+          <label class="check small"><input type="checkbox" name="einheiten" value="Butzen/Semper" checked> <span>Butzen/Semper</span></label>
+          <label class="check small"><input type="checkbox" name="einheiten" value="Chilefeld/Stigeli" checked> <span>Chilefeld/Stigeli</span></label>
+          <label class="check small"><input type="checkbox" name="einheiten" value="Zwillikon" checked> <span>Zwillikon</span></label>
+        </fieldset>
+        <label class="check small"><input type="checkbox" name="einwilligung" required> <span>I would like to receive the newsletter and can unsubscribe at any time.</span></label>
+        <p class="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p>Parent councils of the Primarschule Affoltern am Albis</p>
+      <p class="footer-links">
+        <a data-email href="#"></a>
+        <a id="fb-footer" class="fb" href="#" target="_blank" rel="noopener" hidden>Facebook</a>
+        <a href="#kontakt" data-tab="kontakt">Contact and links</a>
+        <a href="#impressum" data-tab="impressum">Legal notice and privacy</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="content.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

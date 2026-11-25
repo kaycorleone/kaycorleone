@@ -13,13 +13,18 @@ Einfache, statische Website ohne Server und ohne Datenbank. Sie besteht aus weni
 - **Kontakt und Links:** Elternrat, Schulverwaltung, wichtige Adressen
 - **Newsletter:** Anmeldung auf jeder Seite
 
+## Sprachen
+
+Die Website gibt es auf Deutsch (`index.html`) und Englisch (`en.html`). Oben rechts wechselt man die Sprache, die geöffnete Seite bleibt dabei erhalten. Formulare von der englischen Seite kommen mit deutschem Betreff und dem Zusatz «(EN)» beim Elternrat an.
+
 ## Anpassen
 
 | Datei | Inhalt |
 | --- | --- |
 | `config.js` | Gemeinsame E-Mail-Adresse und Facebook-Seite, Newsletter-Dienst, optionaler Formulardienst, Verantwortliche je Elternrat für das Impressum |
 | `content.js` | Mitteilungen, Anlässe, Aufrufe und Projekte, jeweils mit Schuleinheit oder «Alle». Die Listen sind zu Beginn leer; das Muster steht jeweils im Kommentar. |
-| `index.html` | Feste Texte und Links |
+| `index.html` | Feste Texte und Links, Deutsch |
+| `en.html` | Feste Texte und Links, Englisch. Änderungen an `index.html` hier ebenfalls nachführen. |
 
 Vor dem Veröffentlichen muss in `config.js` die echte E-Mail-Adresse eingetragen werden. Der Platzhalter `elternrat@example.org` ist keine gültige Adresse des Elternrats.
 

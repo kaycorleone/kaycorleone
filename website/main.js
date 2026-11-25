@@ -4,8 +4,56 @@
   const $ = (s, root = document) => root.querySelector(s);
   const $$ = (s, root = document) => [...root.querySelectorAll(s)];
   const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
-  const fmt = (iso) => (iso ? new Date(`${iso}T12:00`).toLocaleDateString('de-CH', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) : '');
   const today = new Date().toISOString().slice(0, 10);
+
+  // Sprache der Seite: index.html ist Deutsch, en.html Englisch
+  const EN = document.documentElement.lang.startsWith('en');
+  const T = EN
+    ? {
+        locale: 'en-GB',
+        all: 'All school units',
+        noNews: 'There is no news at the moment. Subscribe to the newsletter so you do not miss anything.',
+        noEventsUnit: 'No events are planned for this school unit at the moment.',
+        noEvents: 'The next events will be announced soon. Let us know which topics interest you.',
+        noNeeds: 'We are not looking for help with a specific event at the moment. You are still welcome to sign up under «Help out».',
+        noProjects: 'The projects of the parent councils will be presented here soon.',
+        register: 'Register',
+        helpBtn: 'I can help',
+        fbFollow: 'Follow us on',
+        fbSoon: 'A Facebook page of the parent councils is being prepared.',
+        tbd: 'to be added',
+        sendError: 'Sending did not work. Please try again later or write us an email.',
+        sent: 'Thank you! We have received your message and will get back to you.',
+        mailOpen: 'Your email program opens with the prepared message. Please send it from there.',
+        pickTopic: 'Please choose at least one topic or write your own suggestion.',
+        pickUnit: 'Please choose at least one school unit.',
+        nlConfirm: 'Almost done: please confirm your subscription via the link in the email you will receive shortly.',
+        nlMail: 'Your email program opens with the subscription. Please send the message from there.',
+      }
+    : {
+        locale: 'de-CH',
+        all: 'Alle Schuleinheiten',
+        noNews: 'Im Moment gibt es keine neuen Mitteilungen. Abonnieren Sie den Newsletter, dann verpassen Sie nichts.',
+        noEventsUnit: 'Für diese Schuleinheit sind im Moment keine Anlässe geplant.',
+        noEvents: 'Die nächsten Anlässe werden bald bekannt gegeben. Schreiben Sie uns, welche Themen Sie interessieren.',
+        noNeeds: 'Im Moment suchen wir keine Unterstützung für einen bestimmten Anlass. Melden Sie sich trotzdem gerne unter «Mithelfen».',
+        noProjects: 'Die Projekte der Elternräte werden hier bald vorgestellt.',
+        register: 'Anmelden',
+        helpBtn: 'Ich helfe mit',
+        fbFollow: 'Folgen Sie uns auf',
+        fbSoon: 'Eine Facebook-Seite der Elternräte ist in Vorbereitung.',
+        tbd: 'wird ergänzt',
+        sendError: 'Das Senden hat nicht geklappt. Bitte versuchen Sie es später erneut oder schreiben Sie uns eine E-Mail.',
+        sent: 'Vielen Dank! Wir haben Ihre Nachricht erhalten und melden uns.',
+        mailOpen: 'Ihr E-Mail-Programm öffnet sich mit der vorbereiteten Nachricht. Bitte senden Sie sie dort ab.',
+        pickTopic: 'Bitte wählen Sie mindestens ein Thema oder schreiben Sie einen eigenen Vorschlag.',
+        pickUnit: 'Bitte wählen Sie mindestens eine Schuleinheit.',
+        nlConfirm: 'Fast geschafft: Bitte bestätigen Sie die Anmeldung über den Link in der E-Mail, die Sie gleich erhalten.',
+        nlMail: 'Ihr E-Mail-Programm öffnet sich mit der Anmeldung. Bitte senden Sie die Nachricht dort ab.',
+      };
+  const fmt = (iso) => (iso ? new Date(`${iso}T12:00`).toLocaleDateString(T.locale, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) : '');
+  // Texte aus content.js: auf der englischen Seite «titel_en» usw., sonst der deutsche Text
+  const tx = (x, key) => (EN && x[`${key}_en`]) || x[key] || '';
 
   // Navigation über Reiter, die Adresse (#elternbildung usw.) bleibt teilbar
   const TABS = ['start', 'elternbildung', 'projekte', 'mithelfen', 'neu', 'so-gehts', 'kontakt', 'impressum'];
@@ -43,18 +91,25 @@
     menuBtn.setAttribute('aria-expanded', String(open));
   });
 
+  // Beim Sprachwechsel auf derselben Seite bleiben
+  $$('[data-lang-link]').forEach((a) =>
+    a.addEventListener('click', () => {
+      a.href = a.getAttribute('href').split('#')[0] + location.hash;
+    })
+  );
+
   // Inhalte aus content.js
   const emptyNote = (text) => `<p class="empty">${esc(text)}</p>`;
 
   // Kennzeichnung der Schuleinheit; ohne Angabe gilt ein Eintrag für alle
-  const unitOf = (x) => (x.schuleinheit && x.schuleinheit !== 'Alle' ? x.schuleinheit : 'Alle Schuleinheiten');
-  const unitTag = (x) => `<span class="tag">${esc(unitOf(x))}</span>`;
-  const matches = (x, unit) => !unit || unitOf(x) === unit || unitOf(x) === 'Alle Schuleinheiten';
+  const unitOf = (x) => (x.schuleinheit && x.schuleinheit !== 'Alle' ? x.schuleinheit : '');
+  const unitTag = (x) => `<span class="tag">${esc(unitOf(x) || T.all)}</span>`;
+  const matches = (x, unit) => !unit || !unitOf(x) || unitOf(x) === unit;
 
   const news = (content.news || []).slice().sort((a, b) => String(b.datum).localeCompare(String(a.datum)));
   $('#news').innerHTML = news.length
-    ? news.map((n) => `<article class="item"><p class="meta">${esc(fmt(n.datum))} ${unitTag(n)}</p><h3>${esc(n.titel)}</h3><p>${esc(n.text)}</p></article>`).join('')
-    : emptyNote('Im Moment gibt es keine neuen Mitteilungen. Abonnieren Sie den Newsletter, dann verpassen Sie nichts.');
+    ? news.map((n) => `<article class="item"><p class="meta">${esc(fmt(n.datum))} ${unitTag(n)}</p><h3>${esc(tx(n, 'titel'))}</h3><p>${esc(tx(n, 'text'))}</p></article>`).join('')
+    : emptyNote(T.noNews);
 
   const events = (content.events || []).filter((e) => !e.datum || e.datum >= today).sort((a, b) => String(a.datum).localeCompare(String(b.datum)));
   const needs = content.needs || [];
@@ -67,13 +122,13 @@
           .map(
             (e) => `<article class="card event">
               <p class="meta">${esc(fmt(e.datum))}${e.zeit ? `, ${esc(e.zeit)}` : ''}${e.ort ? ` · ${esc(e.ort)}` : ''} ${unitTag(e)}</p>
-              <h3>${esc(e.titel)}</h3>
-              ${e.text ? `<p>${esc(e.text)}</p>` : ''}
-              ${e.anmeldung ? `<a class="btn btn-small" href="${mailto(`Anmeldung: ${e.titel} (${unitOf(e)})`, 'Ich melde mich an.\n\nName:\nAnzahl Personen:')}">Anmelden</a>` : ''}
+              <h3>${esc(tx(e, 'titel'))}</h3>
+              ${tx(e, 'text') ? `<p>${esc(tx(e, 'text'))}</p>` : ''}
+              ${e.anmeldung ? `<a class="btn btn-small" href="${mailto(`Anmeldung: ${e.titel} (${unitOf(e) || 'Alle'})`, 'Ich melde mich an.\n\nName:\nAnzahl Personen:')}">${T.register}</a>` : ''}
             </article>`
           )
           .join('')
-      : emptyNote(unit ? 'Für diese Schuleinheit sind im Moment keine Anlässe geplant.' : 'Die nächsten Anlässe werden bald bekannt gegeben. Schreiben Sie uns, welche Themen Sie interessieren.');
+      : emptyNote(unit ? T.noEventsUnit : T.noEvents);
 
     const nd = needs.filter((n) => matches(n, unit));
     $('#needs').innerHTML = nd.length
@@ -81,18 +136,18 @@
           .map(
             (n) => `<article class="card need">
               <p class="meta">${esc(fmt(n.datum))} ${unitTag(n)}</p>
-              <h3>${esc(n.titel)}</h3>
-              <p>${esc(n.text)}</p>
-              <a class="btn btn-small" href="#projekte" data-pick="${esc(n.titel)}" data-pick-unit="${esc(n.schuleinheit || '')}">Ich helfe mit</a>
+              <h3>${esc(tx(n, 'titel'))}</h3>
+              <p>${esc(tx(n, 'text'))}</p>
+              <a class="btn btn-small" href="#projekte" data-pick="${esc(n.titel)}" data-pick-unit="${esc(unitOf(n))}">${T.helpBtn}</a>
             </article>`
           )
           .join('')
-      : emptyNote('Im Moment suchen wir keine Unterstützung für einen bestimmten Anlass. Melden Sie sich trotzdem gerne unter «Mithelfen».');
+      : emptyNote(T.noNeeds);
 
     const pr = projects.filter((p) => matches(p, unit));
     $('#projects').innerHTML = pr.length
-      ? pr.map((p) => `<article class="card"><p class="meta">${p.status ? `${esc(p.status)} ` : ''}${unitTag(p)}</p><h3>${esc(p.titel)}</h3><p>${esc(p.text)}</p></article>`).join('')
-      : emptyNote('Die Projekte der Elternräte werden hier bald vorgestellt.');
+      ? pr.map((p) => `<article class="card"><p class="meta">${tx(p, 'status') ? `${esc(tx(p, 'status'))} ` : ''}${unitTag(p)}</p><h3>${esc(tx(p, 'titel'))}</h3><p>${esc(tx(p, 'text'))}</p></article>`).join('')
+      : emptyNote(T.noProjects);
   }
 
   // Ein Filter gilt für beide Seiten, damit die Auswahl beim Wechseln erhalten bleibt
@@ -104,10 +159,12 @@
   );
   renderLists();
 
+  // Projektauswahl: Wert bleibt deutsch (für den Elternrat), angezeigt wird die Sprache der Seite
   const select = $('#project-select');
-  for (const t of [...needs.map((n) => n.titel), ...projects.map((p) => p.titel)]) {
+  for (const item of [...needs, ...projects]) {
     const o = document.createElement('option');
-    o.textContent = t;
+    o.value = item.titel;
+    o.textContent = tx(item, 'titel');
     select.append(o);
   }
   document.addEventListener('click', (e) => {
@@ -116,7 +173,7 @@
     e.preventDefault();
     select.value = pick.dataset.pick;
     const unitSelect = $('select[name=schuleinheit]', select.closest('form'));
-    if (pick.dataset.pickUnit && pick.dataset.pickUnit !== 'Alle') unitSelect.value = pick.dataset.pickUnit;
+    if (pick.dataset.pickUnit) unitSelect.value = pick.dataset.pickUnit;
     select.closest('form').scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
@@ -132,18 +189,19 @@
   if (config.facebookUrl) {
     fbFooter.href = config.facebookUrl;
     fbFooter.hidden = false;
-    $('#fb-contact').innerHTML = `Folgen Sie uns auf <a href="${esc(config.facebookUrl)}" target="_blank" rel="noopener">Facebook</a>.`;
+    $('#fb-contact').innerHTML = `${T.fbFollow} <a href="${esc(config.facebookUrl)}" target="_blank" rel="noopener">Facebook</a>.`;
   } else {
-    $('#fb-contact').textContent = 'Eine Facebook-Seite des Elternrats ist in Vorbereitung.';
+    $('#fb-contact').textContent = T.fbSoon;
   }
 
   // Impressum: Verantwortliche je Elternrat
   const resp = config.verantwortliche || {};
   $('#responsible').innerHTML = ['Butzen/Semper', 'Chilefeld/Stigeli', 'Zwillikon']
-    .map((u) => `<tr><td>${esc(u)}</td><td>${resp[u] ? esc(resp[u]) : '<span class="empty">wird ergänzt</span>'}</td></tr>`)
+    .map((u) => `<tr><td>${esc(u)}</td><td>${resp[u] ? esc(resp[u]) : `<span class="empty">${T.tbd}</span>`}</td></tr>`)
     .join('');
 
-  // Formulare: per Formulardienst senden oder als E-Mail öffnen
+  // Formulare: per Formulardienst senden oder als E-Mail öffnen.
+  // Betreff und Feldnamen bleiben deutsch, damit die Elternräte alle Nachrichten gleich weiterleiten können.
   const SUBJECTS = {
     themen: 'Themenvorschlag Elternbildung',
     projekt: 'Ich helfe bei einem Projekt mit',
@@ -163,8 +221,10 @@
       if (k === 'einwilligung' || !String(v).trim()) continue;
       data[k] = data[k] ? `${data[k]}, ${v}` : String(v).trim();
     }
+    if (EN) data.sprache_der_seite = 'Englisch';
     return data;
   }
+  LABELS.sprache_der_seite = 'Sprache der Website';
 
   async function deliver(subject, data) {
     if (config.formEndpoint) {
@@ -173,12 +233,12 @@
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({ _subject: subject, ...data }),
       });
-      if (!res.ok) throw new Error('Das Senden hat nicht geklappt. Bitte versuchen Sie es später erneut oder schreiben Sie uns eine E-Mail.');
-      return 'Vielen Dank! Wir haben Ihre Nachricht erhalten und melden uns.';
+      if (!res.ok) throw new Error(T.sendError);
+      return T.sent;
     }
     const body = Object.entries(data).map(([k, v]) => `${LABELS[k] || k}: ${v}`).join('\n');
     location.href = mailto(subject, body);
-    return 'Ihr E-Mail-Programm öffnet sich mit der vorbereiteten Nachricht. Bitte senden Sie sie dort ab.';
+    return T.mailOpen;
   }
 
   $$('form[data-form]').forEach((form) => {
@@ -188,13 +248,13 @@
       const data = collect(form);
       if (form.dataset.form === 'themen' && !data.themen && !data.vorschlag) {
         status.className = 'form-status error';
-        status.textContent = 'Bitte wählen Sie mindestens ein Thema oder schreiben Sie einen eigenen Vorschlag.';
+        status.textContent = T.pickTopic;
         return;
       }
       try {
         status.className = 'form-status ok';
         const unit = data.schuleinheit && !['Alle Schuleinheiten', 'Weiss ich noch nicht'].includes(data.schuleinheit) ? data.schuleinheit : 'Alle';
-        status.textContent = await deliver(`[${unit}] ${SUBJECTS[form.dataset.form]}`, data);
+        status.textContent = await deliver(`[${unit}] ${SUBJECTS[form.dataset.form]}${EN ? ' (EN)' : ''}`, data);
         if (config.formEndpoint) form.reset();
       } catch (err) {
         status.className = 'form-status error';
@@ -212,7 +272,7 @@
     const units = $$('input[name=einheiten]:checked', form).map((i) => i.value);
     if (!units.length) {
       status.className = 'form-status error';
-      status.textContent = 'Bitte wählen Sie mindestens eine Schuleinheit.';
+      status.textContent = T.pickUnit;
       return;
     }
     if (config.newsletterAction) {
@@ -236,11 +296,11 @@
       f.submit();
       f.remove();
       status.className = 'form-status ok';
-      status.textContent = 'Fast geschafft: Bitte bestätigen Sie die Anmeldung über den Link in der E-Mail, die Sie gleich erhalten.';
+      status.textContent = T.nlConfirm;
     } else {
-      location.href = mailto('Anmeldung Newsletter', `Bitte nehmen Sie mich in den Newsletter der Elternräte auf.\n\nE-Mail: ${email}\nSchuleinheiten: ${units.join(', ')}`);
+      location.href = mailto('Anmeldung Newsletter', `Bitte nehmen Sie mich in den Newsletter der Elternräte auf.\n\nE-Mail: ${email}\nSchuleinheiten: ${units.join(', ')}${EN ? '\nSprache: Englisch' : ''}`);
       status.className = 'form-status ok';
-      status.textContent = 'Ihr E-Mail-Programm öffnet sich mit der Anmeldung. Bitte senden Sie die Nachricht dort ab.';
+      status.textContent = T.nlMail;
     }
   });
 
